@@ -3,7 +3,7 @@ session_start();
 include_once '../db.php';
 
 if(!isset($_SESSION["username"]) || $_SESSION["username"] != 'admin'){
-	header("Location: http://www.learntestingonline.com/login.php");
+	header("Location: http://localhost/shopbuddy/index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -114,7 +114,7 @@ width: 500px !important;
                         </ul>
                                </li>
                         <li class="divider-vertical"></li>
-                        <li><a href="http://www.learntestingonline.com/" class="tip icon logout" data-original-title="Switch to Site" data-placement="bottom"><i
+                        <li><a href="http://localhost/shopbuddy/" class="tip icon logout" data-original-title="Switch to Site" data-placement="bottom"><i
                            class="icon-large icon-off"></i></a></li>
                     </ul>
 
