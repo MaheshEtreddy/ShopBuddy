@@ -8,6 +8,7 @@ if(count($_POST)>0) {
 	$pwd = md5($_POST["Password"]);
 	
 	$result = mysql_query("SELECT * FROM admins WHERE username='" . $_POST["Username"] . "' and password = '". $_POST["Password"]."'");
+	echo $result;
 	$row  = mysql_fetch_array($result);
 	
 	$result1 = mysql_query("SELECT * FROM users WHERE name='" . $_POST["Username"] . "' and pass = '". $pwd."'");
