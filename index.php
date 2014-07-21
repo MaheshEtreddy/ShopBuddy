@@ -371,7 +371,7 @@ if(isset($_SESSION["username"]) && $_SESSION["username"] == 'admin') {
 					<p>&copy; Copyright 2012.&nbsp;<a href="#">Privacy</a>&nbsp;&amp;&nbsp;<a href="#">Terms and Conditions</a></p>
 				</div>
 				<div class="span6">
-					<a class="pull-right" href="http://www.codefuel.com" target="_blank">credits by Code Fuel - (by) Mahesh & Vamsy</a>
+					<a class="pull-right" href="http://www.code2fire.com" target="_blank">credits by Code 2 Fire - (by) Mahesh & Vamsy</a>
 				</div>
 			</div>
 		</div>
