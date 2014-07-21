@@ -1,3 +1,34 @@
+<?php
+session_start();
+include_once 'db.php';
+
+$message="";
+if(count($_POST)>0) {
+	
+	$pwd = md5($_POST["Password"]);
+	
+	$result = mysql_query("SELECT * FROM admins WHERE username='" . $_POST["Username"] . "' and password = '". $_POST["Password"]."'");
+	$row  = mysql_fetch_array($result);
+	
+	$result1 = mysql_query("SELECT * FROM users WHERE name='" . $_POST["Username"] . "' and pass = '". $pwd."'");
+	$row1  = mysql_fetch_array($result1);
+	
+	if(is_array($row)) {
+		$_SESSION["user_id"] = $row['id'];
+		$_SESSION["username"] = $row['username'];
+	}elseif (is_array($row1)) {
+		$_SESSION["user_id"] = $row1['id'];
+		$_SESSION["username"] = $row1['name'];
+	}else {
+		$message = "Invalid Username or Password!";
+	}
+}
+if(isset($_SESSION["username"]) && $_SESSION["username"] == 'admin') {
+	header("Location:admin/");
+}elseif (isset($_SESSION["username"]) && $_SESSION["username"] != 'admin') {
+	header("Location:index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -147,7 +178,10 @@
 				</div>
 
 				<div class="well">
-					<form class="form login-form">
+				<div style="color: red;"><?php if ($message != '') {
+			echo $message;
+		} ?></div>
+					<form class="form login-form" action="" method="post">
 						<h2>Sign in</h2>
 						<div>
 							<label>Username</label>
@@ -162,7 +196,7 @@
 
 							<br /><br />
 
-							<button type="submit" class="btn btn-success">Login</button>
+							<input type="submit" name="submit" value = "Login" class="btn btn-success">
 						</div>
 						<br />
 						<a href="#">register</a>&nbsp;&#124;&nbsp;<a href="#">forgot password?</a>
@@ -337,7 +371,7 @@
 					<p>&copy; Copyright 2012.&nbsp;<a href="#">Privacy</a>&nbsp;&amp;&nbsp;<a href="#">Terms and Conditions</a></p>
 				</div>
 				<div class="span6">
-					<a class="pull-right" href="http://www.responsivewebmobile.com" target="_blank">credits by Responsive Web Mobile</a>
+					<a class="pull-right" href="http://www.codefuel.com" target="_blank">credits by Code Fuel - (by) Mahesh & Vamsy</a>
 				</div>
 			</div>
 		</div>
