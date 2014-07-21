@@ -56,7 +56,7 @@ if(isset($_SESSION["username"]) && $_SESSION["username"] == 'admin') {
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="brand" href="/">RWM</a>
+				<a class="brand" href="/index.php">Shop Buddy</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li class="dropdown">
