@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
+	<title>Responsive Web Mobile - Ecommerce Cart</title>
+
+	<!-- Included Bootstrap CSS Files -->
+	<link rel="stylesheet" href="./js/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="./js/bootstrap/css/bootstrap-responsive.min.css" />
+	
+	<!-- Includes FontAwesome -->
+	<link rel="stylesheet" href="./css/font-awesome/css/font-awesome.min.css" />
+
+	<!-- Css -->	
+	<link rel="stylesheet" href="./css/style.css" />
+
+</head>
+<body>
+
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="/">RWM</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">E-Commerce <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="index.html">E-commerce</a></li>
+								<li><a href="ecommerce-item.html">E-commerce Item</a></li>
+								<li><a href="ecommerce-cart.html">E-commerce Cart</a></li>
+								<li><a href="ecommerce-checkout.html">E-commerce Checkout</a></li>
+							</ul>
+						</li>
+					</ul>
+					<form class="navbar-form form-search pull-right">
+						<input id="Search" name="Search" type="text" placeholder="type text to search for" class="input-medium search-query">
+						<button type="submit" class="btn">Search</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="span3">
+				<div class="well">
+
+					<div class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							<i class="icon-shopping-cart"></i>
+								3 item - $999.99
+								<b class="caret"></b></a>
+						</a>
+						<div class="dropdown-menu well" role="menu" aria-labelledby="dLabel">
+							<p>Item x 1 <span class="pull-right">$333.33</span></p>
+							<p>Item x 1 <span class="pull-right">$333.33</span></p>
+							<p>Item x 1 <span class="pull-right">$333.33</span></p>
+							<a href="#" class="btn btn-primary">Checkout</a>
+						</div>
+					</div>
+					
+				</div>
+
+				<div class="well">
+					<ul class="nav nav-list">
+						<li class="nav-header">Sidebar</li>
+						<li class="active">
+							<a href="#">Link</a>
+						</li>
+						<li>
+							<a href="#">Link</a>
+						</li>
+						<li>
+							<a href="#">Link</a>
+						</li>
+						
+						<li class="nav-header">Sidebar</li>
+						<li>
+							<a href="#">Link</a>
+						</li>
+						<li>
+							<a href="#">Link</a>
+						</li>
+						<li>
+							<a href="#">Link</a>
+						</li>
+						
+						<li class="nav-header">Sidebar</li>
+						<li>
+							<a href="#">Link</a>
+						</li>
+						<li>
+							<a href="#">Link</a>
+						</li>
+						<li>
+							<a href="#">Link</a>
+						</li>
+					</ul>
+				</div>				
+			</div>
+			
+			<div class="span9">
+				<h2>Shopping Cart</h2>
+				<form>
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th>Item Name</th>
+							<th>Qty</th>
+							<th>Unit Price</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>AB29837</td>
+							<td><input id="quantity-1" name="quantity-1" type="text" class="span1" value="1" />&nbsp;<a href="#"><i class="icon-refresh"></i></a><a href="#"><i class="icon-trash"></i></a></td>
+							<td>$333.33</td>
+							<td>$333.33</td>
+						</tr>
+						<tr>
+							<td>AC34423</td>
+							<td><input id="quantity-1" name="quantity-1" type="text" class="span1" value="2" />&nbsp;<a href="#"><i class="icon-refresh"></i></a><a href="#"><i class="icon-trash"></i></a></td>
+							<td>$333.33</td>
+							<td>$666.66</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+
+			<dl class="dl-horizontal pull-right">
+				<dt>Sub-total:</dt>
+				<dd>$999.99</dd>
+				
+				<dt>Shipping Cost:</dt>
+				<dd>$0.01</dd>
+
+				<dt>Total:</dt>
+				<dd>$1000.00</dd>
+			</dl>
+			<div class="clearfix"></div>
+			<a href="#" class="btn btn-success pull-right">Check out</a>
+			<a href="#" class="btn btn-primary">Continue Shopping</a>
+		</div>
+	</div>
+
+	<hr />
+
+	<footer id="footer" class="vspace20">
+		<div class="container">
+			<div class="row">
+				<div class="span4">
+					<h4>Info</h4>
+					<ul class="nav nav-stacked">
+						<li><a href="#">Sell Conditions</a>
+						<li><a href="#">Shipping Costs</a>
+						<li><a href="#">Shipping Conditions</a>
+						<li><a href="#">Returns</a>
+						<li><a href="#">About Us</a>
+					</ul>
+				</div> 
+
+				<div class="span4">
+					<h4>Location and Contacts</h4>
+					<p><i class="icon-map-marker"></i>&nbsp;I do not Know Avenue, A City</p>
+					<p><i class="icon-phone"></i>&nbsp;Phone: 234 739.126.72</p>
+					<p><i class="icon-print"></i>&nbsp;Fax: 213 123.12.090</p>
+					<p><i class="icon-envelope"></i>&nbsp;Email: info@mydomain.com</p>
+					<p><i class="icon-globe"></i>&nbsp;Web: http://www.mydomain.com</p>
+				</div>
+
+				<div class="span4">
+					<h4>Newsletter</h4>
+					<p>Write you email to subscribe to our Newsletter service. Thanks!</p>
+					<form class="form-newsletter">
+						<div class="input-append">
+							<input type="email" class="span2" placeholder="your email">
+							<button type="submit" class="btn">Subscribe</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="span6">
+					<p>&copy; Copyright 2012.&nbsp;<a href="#">Privacy</a>&nbsp;&amp;&nbsp;<a href="#">Terms and Conditions</a></p>
+				</div>
+				<div class="span6">
+					<a class="pull-right" href="http://www.responsivewebmobile.com" target="_blank">credits by Responsive Web Mobile</a>
+				</div>
+			</div>
+		</div>
+	</footer>	
+
+	<script src="./js/jquery-1.10.0.min.js"></script>
+	<script src="./js/bootstrap/js/bootstrap.min.js"></script>
+	<script src="./js/holder.js"></script>
+	<script src="./js/script.js"></script>
+</body>
+</html>
