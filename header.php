@@ -43,7 +43,15 @@ include_once 'db.php';
 							</ul>
 						</li> -->
 						<li><a href="#"><i class="icon-pencil icon-black"></i>SB Cart</a></li>
-                        <li><a href="#"><i class="icon-file icon-black"></i>Account</a></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-file icon-black"></i>Settings <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Account Settings</a></li>
+								<li><a href="#l">Profile</a></li>
+								<li><a href="#">Your Orders</a></li>
+								<li><a href="#">E-commerce Checkout</a></li>
+							</ul>
+						</li>
 						<li><a href="logout.php"><i class="icon-tasks icon-black"></i>Logout</a></li>
 						
 					</ul>
