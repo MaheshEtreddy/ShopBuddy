@@ -30,7 +30,7 @@ include_once 'db.php';
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="brand" href="/index.php">Shop Buddy</a>
+				<a class="brand" href="/index.php"><img alt="ShopBuddy" src="img/shopbuddy-logo-large.png"></a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<!-- <li class="dropdown">
