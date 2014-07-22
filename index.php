@@ -1,6 +1,6 @@
 <?php
-session_start();
-include_once 'db.php';
+
+include_once 'header.php';
 
 $message="";
 if(count($_POST)>0) {
@@ -29,55 +29,9 @@ if(isset($_SESSION["username"]) && $_SESSION["username"] == 'admin') {
 	header("Location:index.php");
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
-	<title>ShopBuddy - Ecommerce</title>
 
-	<!-- Included Bootstrap CSS Files -->
-	<link rel="stylesheet" href="./js/bootstrap/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="./js/bootstrap/css/bootstrap-responsive.min.css" />
+<!-- body included header in the top. -->
 	
-	<!-- Includes FontAwesome -->
-	<link rel="stylesheet" href="./css/font-awesome/css/font-awesome.min.css" />
-
-	<!-- Css -->	
-	<link rel="stylesheet" href="./css/style.css" />
-
-</head>
-<body>
-
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<button class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse" type="button">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="brand" href="/index.php">Shop Buddy</a>
-				<div class="nav-collapse collapse">
-					<ul class="nav">
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">E-Commerce <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="index.html">E-commerce</a></li>
-								<li><a href="ecommerce-item.html">E-commerce Item</a></li>
-								<li><a href="ecommerce-cart.html">E-commerce Cart</a></li>
-								<li><a href="ecommerce-checkout.html">E-commerce Checkout</a></li>
-							</ul>
-						</li>
-					</ul>
-					<form class="navbar-form form-search pull-right">
-						<input id="Search" name="Search" type="text" placeholder="type text to search for" class="input-medium search-query">
-						<button type="submit" class="btn">Search</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-
 	<div class="container">
 		<div class="row">
 			<div class="span3">
@@ -199,7 +153,7 @@ if(isset($_SESSION["username"]) && $_SESSION["username"] == 'admin') {
 							<input type="submit" name="submit" value = "Login" class="btn btn-success">
 						</div>
 						<br />
-						<a href="#">register</a>&nbsp;&#124;&nbsp;<a href="#">forgot password?</a>
+						<a href="new_user.php">register</a>&nbsp;&#124;&nbsp;<a href="#">forgot password?</a>
 					</form>
 				</div>
 			</div>
@@ -350,8 +304,8 @@ if(isset($_SESSION["username"]) && $_SESSION["username"] == 'admin') {
 					<p><i class="icon-map-marker"></i>&nbsp;I do not Know Avenue, A City</p>
 					<p><i class="icon-phone"></i>&nbsp;Phone: 234 739.126.72</p>
 					<p><i class="icon-print"></i>&nbsp;Fax: 213 123.12.090</p>
-					<p><i class="icon-envelope"></i>&nbsp;Email: info@mydomain.com</p>
-					<p><i class="icon-globe"></i>&nbsp;Web: http://www.mydomain.com</p>
+					<p><i class="icon-envelope"></i>&nbsp;Email: info@code2fire.com</p>
+					<p><i class="icon-globe"></i>&nbsp;Web: http://www.code2fire.com</p>
 				</div>
 
 				<div class="span4">
