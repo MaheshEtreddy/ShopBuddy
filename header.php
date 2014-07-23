@@ -43,10 +43,12 @@ include_once 'db.php';
 								<li><a href="ecommerce-checkout.html">E-commerce Checkout</a></li>
 							</ul>
 						</li> -->
-						
-						<li><a href="#"><i class="icon-pencil icon-black"></i>SB Cart</a></li>
+						<!-- 
+						<li><a href="#"><i class="icon-pencil icon-black"></i>SB Cart</a></li> -->
 						
 						<?php if (isset($_SESSION["username"])) {?>
+						
+						<li><a href="#"><i class="icon-pencil icon-black"></i>Hi <?=$_SESSION["username"]?></a></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-file icon-black"></i>Settings <b class="caret"></b></a>
 							<ul class="dropdown-menu">

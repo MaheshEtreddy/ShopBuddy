@@ -7,15 +7,17 @@ if(count($_POST)>0) {
 
 	$pwd = $_POST["Password"];
 
-	$result = mysql_query("SELECT * FROM customers WHERE customerMail = '" . $_POST["Username"] . "' and password = '". $_POST["Password"]."'");
-	$row  = mysql_fetch_row($result);
+	$sql = "SELECT * FROM customers WHERE customerMail = '{$_POST["Username"]}' and password = '{$_POST["Password"]}'";
+	
+	$result = mysql_query($sql);
+	$row  = mysql_fetch_array($result);
 
 	$result1 = mysql_query("SELECT * FROM employee WHERE email='" . $_POST["Username"] . "' and password = '". $pwd."'");
 	$row1  = mysql_fetch_row($result1);
 
 	if(is_array($row)) {
 		$_SESSION["user_id"] = $row['customerID'];
-		$_SESSION["username"] = $row['customerMail'];
+		$_SESSION["username"] = $row['customerName'];
 	}elseif (is_array($row1)) {
 		$_SESSION["user_id"] = $row1['employeeNumber'];
 		$_SESSION["username"] = $row1['email'];
