@@ -32,9 +32,9 @@ if(isset($_SESSION["username"]) && $_SESSION["username"] == 'admin') {
 }
 ?>
 
-<div class="container">
+<div class="container pull-right" >
 	<div class="row" style="margin-top: 30px">
-		<div class="well">
+		<div class="well span3 ">
 			<div style="color: red;"><?php
 			
 			if ($message != '') {
@@ -57,5 +57,11 @@ if(isset($_SESSION["username"]) && $_SESSION["username"] == 'admin') {
 					href="#">forgot password?</a>
 			</form>
 		</div>
+		<div class="span9">
+				<div class="hero-unit">
+					<h1 class="">Special Offer</h1>
+					<p class="">here is the best offer of the month! Do not loose it!</p>
+					<p><a href="#" class="btn btn-primary btn-large">Learn more »</a></p>
+				</div></div>
 	</div>
 </div>
