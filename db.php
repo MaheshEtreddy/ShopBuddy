@@ -1,5 +1,5 @@
 <?php
-<<<<<<< HEAD
+
 
 try {
 	
@@ -15,7 +15,7 @@ try {
 	echo $e;
 }
 
-=======
+
 $con = mysql_connect("localhost","root","");
 if (!$con)
 {
@@ -23,6 +23,6 @@ if (!$con)
 }
 
 mysql_select_db("shopbuddy", $con);
->>>>>>> refs/remotes/origin/master
+
 
 ?>
