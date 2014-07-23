@@ -32,9 +32,14 @@ if(isset($_SESSION["username"]) && $_SESSION["username"] == 'admin') {
 
 <!-- body included header in the top. -->
 	
+<<<<<<< HEAD
 
 	<div class="container">
 		<div class="row">
+=======
+	<div class="container">
+		<div class="row" style="margin-top: 30px">
+>>>>>>> refs/remotes/origin/master
 			<div class="span3">
 				<div class="well">
 

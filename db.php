@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 
 try {
 	
@@ -14,5 +15,14 @@ try {
 	echo $e;
 }
 
+=======
+$con = mysql_connect("localhost","root","");
+if (!$con)
+{
+	die('Could not connect: ' . mysql_error());
+}
+
+mysql_select_db("shopbuddy", $con);
+>>>>>>> refs/remotes/origin/master
 
 ?>
