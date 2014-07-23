@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
+	<title>Responsive Web Mobile - Ecommerce Item</title>
+
+	<!-- Included Bootstrap CSS Files -->
+	<link rel="stylesheet" href="./js/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="./js/bootstrap/css/bootstrap-responsive.min.css" />
+	
+	<!-- Includes FontAwesome -->
+	<link rel="stylesheet" href="./css/font-awesome/css/font-awesome.min.css" />
+
+	<!-- Css -->	
+	<link rel="stylesheet" href="./css/style.css" />
+
+</head>
+<body>
+
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="/">RWM</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">E-Commerce <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="index.html">E-commerce</a></li>
+								<li><a href="ecommerce-item.html">E-commerce Item</a></li>
+								<li><a href="ecommerce-cart.html">E-commerce Cart</a></li>
+								<li><a href="ecommerce-checkout.html">E-commerce Checkout</a></li>
+							</ul>
+						</li>
+					</ul>
+					<form class="navbar-form form-search pull-right">
+						<input id="Search" name="Search" type="text" placeholder="type text to search for" class="input-medium search-query">
+						<button type="submit" class="btn">Search</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="span3">
+				<div class="well">
+
+					<div class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							<i class="icon-shopping-cart"></i>
+								3 item - $999.99
+								<b class="caret"></b></a>
+						</a>
+						<div class="dropdown-menu well" role="menu" aria-labelledby="dLabel">
+							<p>Item x 1 <span class="pull-right">$333.33</span></p>
+							<p>Item x 1 <span class="pull-right">$333.33</span></p>
+							<p>Item x 1 <span class="pull-right">$333.33</span></p>
+							<a href="#" class="btn btn-primary">Checkout</a>
+						</div>
+					</div>
+					
+				</div>
+
+				<div class="well">
+					<ul class="nav nav-list">
+						<li class="nav-header">Sidebar</li>
+						<li class="active">
+							<a href="#">Link</a>
+						</li>
+						<li>
+							<a href="#">Link</a>
+						</li>
+						<li>
+							<a href="#">Link</a>
+						</li>
+						
+						<li class="nav-header">Sidebar</li>
+						<li>
+							<a href="#">Link</a>
+						</li>
+						<li>
+							<a href="#">Link</a>
+						</li>
+						<li>
+							<a href="#">Link</a>
+						</li>
+						
+						<li class="nav-header">Sidebar</li>
+						<li>
+							<a href="#">Link</a>
+						</li>
+						<li>
+							<a href="#">Link</a>
+						</li>
+						<li>
+							<a href="#">Link</a>
+						</li>
+					</ul>
+				</div>				
+			</div>
+			
+			<div class="span9">
+				<div class="row">
+					<div class="span5">
+						<div id="items-carousel" class="carousel slide mbottom0">
+							<div class="carousel-inner">
+								<div class="active item">
+									<img class="media-object" src="holder.js/470x310" alt="" />
+								</div>
+
+								<div class="item">
+									<img class="media-object" src="holder.js/470x310" alt="" />
+								</div>
+
+								<div class="item">
+									<img class="media-object" src="holder.js/470x310" alt="" />
+								</div>
+							</div>
+							<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+							<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+						</div>
+					</div>
+
+					<div class="span4">
+						<h4>Item Brand and Category</h4>
+						<h5>AB29837 Item Model</h5>
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+						<h4>$333.33</h4>
+						<h5>Options</h5>
+						<form>
+							<select id="size" name="size">
+								<option>choose size</option>
+								<option>S</option>
+								<option>M</option>
+								<option>L</option>
+								<option>XL</option>
+							</select>
+
+							<select id="color" name="color">
+								<option>choose color</option>
+								<option>red</option>
+								<option>green</option>
+								<option>blue</option>
+							</select>
+
+							<label>
+								<input type="text" id="quantity" name="quantity" value="1" class="span1" />&nbsp;Qty
+							</label>
+							<button class="btn btn-primary">Add to Chart</button>
+						</form>
+						<a href="#">+ Add to whishlist</a>
+						
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="span9">
+						<ul class="nav nav-tabs" id="tabs">
+							<li class="active"><a href="#description">Description</a></li>
+							<li><a href="#reviews"><span class="badge badge-inverse">10</span> Reviews</a></li>
+						</ul>
+
+						<div class="tab-content">
+							<div class="tab-pane active" id="description">
+								<p>
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+								</p>
+							</div>
+							<div class="tab-pane" id="reviews">...</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<hr />
+
+	<footer id="footer" class="vspace20">
+		<div class="container">
+			<div class="row">
+				<div class="span4">
+					<h4>Info</h4>
+					<ul class="nav nav-stacked">
+						<li><a href="#">Sell Conditions</a>
+						<li><a href="#">Shipping Costs</a>
+						<li><a href="#">Shipping Conditions</a>
+						<li><a href="#">Returns</a>
+						<li><a href="#">About Us</a>
+					</ul>
+				</div> 
+
+				<div class="span4">
+					<h4>Location and Contacts</h4>
+					<p><i class="icon-map-marker"></i>&nbsp;I do not Know Avenue, A City</p>
+					<p><i class="icon-phone"></i>&nbsp;Phone: 234 739.126.72</p>
+					<p><i class="icon-print"></i>&nbsp;Fax: 213 123.12.090</p>
+					<p><i class="icon-envelope"></i>&nbsp;Email: info@mydomain.com</p>
+					<p><i class="icon-globe"></i>&nbsp;Web: http://www.mydomain.com</p>
+				</div>
+
+				<div class="span4">
+					<h4>Newsletter</h4>
+					<p>Write you email to subscribe to our Newsletter service. Thanks!</p>
+					<form class="form-newsletter">
+						<div class="input-append">
+							<input type="email" class="span2" placeholder="your email">
+							<button type="submit" class="btn">Subscribe</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="span6">
+					<p>&copy; Copyright 2012.&nbsp;<a href="#">Privacy</a>&nbsp;&amp;&nbsp;<a href="#">Terms and Conditions</a></p>
+				</div>
+				<div class="span6">
+					<a class="pull-right" href="http://www.responsivewebmobile.com" target="_blank">credits by Responsive Web Mobile</a>
+				</div>
+			</div>
+		</div>
+	</footer>	
+
+	<script src="./js/jquery-1.10.0.min.js"></script>
+	<script src="./js/bootstrap/js/bootstrap.min.js"></script>
+	<script src="./js/holder.js"></script>
+	<script src="./js/script.js"></script>
+</body>
+</html>
