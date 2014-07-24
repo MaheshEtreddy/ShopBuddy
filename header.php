@@ -25,13 +25,14 @@ include_once 'db.php';
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<button class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse" type="button">
+				<button class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse" type="button"></button>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
-				</button>
-				<a class="brand" href="/index.php"><img alt="ShopBuddy" src="img/shopbuddy-logo-large.png" style="height: 35px"></a>
-				<div class="nav-collapse collapse">
+
+				<a class="brand" href="/index.php"><img alt="ShopBuddy" src="img/shopbuddy-logo-large.png" style="height: 45px"></a>
+
+				<div class="nav-collapse collapse pull-right" >
 					<ul class="nav">
 						<!-- <li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">E-Commerce <b class="caret"></b></a>
@@ -42,7 +43,12 @@ include_once 'db.php';
 								<li><a href="ecommerce-checkout.html">E-commerce Checkout</a></li>
 							</ul>
 						</li> -->
-						<li><a href="#"><i class="icon-pencil icon-black"></i>SB Cart</a></li>
+						<!-- 
+						<li><a href="#"><i class="icon-pencil icon-black"></i>SB Cart</a></li> -->
+						
+						<?php if (isset($_SESSION["username"])) {?>
+						
+						<li><a href="#"><i class="icon-pencil icon-black"></i>Hi <?=$_SESSION["username"]?></a></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-file icon-black"></i>Settings <b class="caret"></b></a>
 							<ul class="dropdown-menu">
@@ -53,12 +59,10 @@ include_once 'db.php';
 							</ul>
 						</li>
 						<li><a href="logout.php"><i class="icon-tasks icon-black"></i>Logout</a></li>
-						
+						<?php }else{?>
+						<li><a href="login.php"><i class="icon-tasks icon-black"></i>Login</a></li>
+						<?php }?>
 					</ul>
-					<form class="navbar-form form-search pull-right">
-						<input id="Search" name="Search" type="text" placeholder="type text to search for" class="input-medium search-query">
-						<button type="submit" class="btn">Search</button>
-					</form>
 				</div>
 			</div>
 		</div>
