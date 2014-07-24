@@ -3,6 +3,9 @@ include_once 'header.php';
 
 $message="";
 
+if (isset($_SESSION['registered']) != '') {
+	$message = $_SESSION['registered'];
+}
 if(count($_POST)>0) {
 
 	$pwd = $_POST["Password"];

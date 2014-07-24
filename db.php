@@ -9,7 +9,7 @@ try {
 		die('Could not connect: ' . mysql_error());
 	}
 	
-	mysql_select_db("sbdata", $con);
+	mysql_select_db("sbdata", $con); 
 	
 } catch (Exception $e) {
 	echo $e;

@@ -6,8 +6,8 @@ if (isset ( $_POST ['submit'] ) == 'Create User') {
 	$name = $_POST ['userName'];
 	$email = $_POST ['userID'];
 	$phone = trim ( $_POST ['phone'] );
-	$pass = md5 ( $_POST ['Password'] );
-	$confirmpass = md5 ( $_POST ['confirmPassword'] );
+	$pass =  $_POST ['password'] ;
+	$confirmpass =  $_POST ['confirmPassword'] ;
 	$streetaddress = $_POST ['streetAddress'];
 	$postalCode = $_POST ['postalCode'];
 	$city = $_POST['city'];
@@ -18,7 +18,7 @@ if (isset ( $_POST ['submit'] ) == 'Create User') {
 	
 	
 	$err = null;
-	if (md5($pass) === md5($confirmpass)) {
+	if(strcmp($pass, $confirmpass) !== 0) {
   	 $err .= "<font style='color:black; font-weight:bold;'> Password doesn't match<br/>";
 	}
 		
@@ -26,19 +26,21 @@ if (isset ( $_POST ['submit'] ) == 'Create User') {
 		$err .= "<font style='color:black; font-weight:bold;'>$email</font> is <strong>NOT</strong> a valid email address.<br/>";
 	}
 	
-	if (strlen($phone) != 11) {
+	if ( !is_numeric($phone) && ($phone!= 0)) {
 		$err .= "<font style='color:black; font-weight:bold;'>$phone</font> is <strong>NOT</strong> a valid phone number.<br/>";
 	}
 	if ($err == null) {
-		$insert = "INSERT INTO `customers` (`customerID`,`customerName`, `phone`,`addressLine1`,`city`,`state,`postalCode`,`country`,`password` ) VALUES
+		$insert = "INSERT INTO `customers` (`customerMail`,`customerName`, `phone`,`addressLine1`,`city`,`state`,`postalCode`,`country`,`password` ) VALUES
 		( '{$email}','{$name}','{$phone}', '{$streetaddress}','{$city}', '{$state}','{$postalCode}','{$country}','{$pass}')";
-		$inserted = mysql_query ( $insert );
 		
-		if ($inserted != FALSE) {
-			echo "<div class='alert alert-success alert-block'>
-			
-			New user <strong>{$name}</strong> has been successfully created!.
+	 $inserted = mysql_query ( $insert );
+	 if ($inserted != FALSE) {
+	 $_SESSION['registered'] =  "<div class='alert alert-success alert-block'>
+	 New user <strong>{$name}</strong> has been successfully created!.
 			</div>";
+	 
+	header('Location: login.php');
+	 
 		}
 	} else {
 		echo "<div class='alert alert-error'>
@@ -58,7 +60,7 @@ if (isset ( $_POST ['submit'] ) == 'Create User') {
 	<div style="width: 560px; align-self: center; padding: 50px 570px 50px 570px;">
 		<form name="form" id="form" class="form login-form" method="POST" action="">
 			<fieldset>
-				<legend>Create User</legend>
+				<legend>Regiser User</legend>
 
 				<div class="control-group">
 					<label class="control-label" for="userName">User Name</label>
