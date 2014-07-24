@@ -2,7 +2,7 @@
 session_start();
 include_once '../db.php';
 
-if(!isset($_SESSION["username"]) || $_SESSION["username"] != 'admin'){
+if(!isset($_SESSION["username"]) || strstr($_SESSION["username"], "@") != '@classicmodelcars.com'){
 	header("Location: http://localhost/shopbuddy/index.php");
 }
 ?>

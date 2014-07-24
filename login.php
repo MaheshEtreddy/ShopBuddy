@@ -8,12 +8,13 @@ if(count($_POST)>0) {
 	$pwd = $_POST["Password"];
 
 	$sql = "SELECT * FROM customers WHERE customerMail = '{$_POST["Username"]}' and password = '{$_POST["Password"]}'";
+	$sql1 = "SELECT * FROM employees WHERE email = '{$_POST["Username"]}' and password = '{$_POST["Password"]}'";
 	
 	$result = mysql_query($sql);
 	$row  = mysql_fetch_array($result);
 
-	$result1 = mysql_query("SELECT * FROM employee WHERE email='" . $_POST["Username"] . "' and password = '". $pwd."'");
-	$row1  = mysql_fetch_row($result1);
+	$result1 = mysql_query($sql1);
+	$row1  = mysql_fetch_array($result1);
 
 	if(is_array($row)) {
 		$_SESSION["user_id"] = $row['customerID'];
@@ -25,9 +26,11 @@ if(count($_POST)>0) {
 		$message = "Invalid Username or Password!";
 	}
 }
-if(isset($_SESSION["username"]) && $_SESSION["username"] == 'admin') {
-	header("Location:admin/");
-}elseif (isset($_SESSION["username"]) && $_SESSION["username"] != 'admin') {
+
+
+if(isset($_SESSION["username"]) && strstr($_SESSION["username"], "@") == '@classicmodelcars.com') {
+	header("Location: admin/");
+}elseif (isset($_SESSION["username"]) && strstr($_SESSION["username"], "@") != '@classicmodelcars.com' ) {
 	header("Location:index.php");
 }
 ?>
