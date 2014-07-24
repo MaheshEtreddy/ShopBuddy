@@ -167,10 +167,11 @@ if (isset ( $_POST ['submit'] ) == 'Create User') {
 						<input type="submit" value="Submit" name="submit">
 
 					</div>
-				</div>
-			</fieldset>
-		</form>
-	</div>
-</div>
-<hr>
+					</div>
+					</fieldset>
+					</form>
+					</div>
+					</div>
+					
+					
 
