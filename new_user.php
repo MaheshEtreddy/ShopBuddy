@@ -1,6 +1,6 @@
 <?php
 include_once 'header.php';
-
+//Page edited by Mahesh
 if (isset ( $_POST ['submit'] ) == 'Create User') {
 	
 	$name = $_POST ['userName'];
