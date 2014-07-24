@@ -89,7 +89,16 @@ width: 500px !important;
                             </ul>
                         </li>
                         <li><a href="enquiry_details.php"><i class="icon-pencil icon-black"></i>Enquiry list</a></li>
-                        <li><a href="pages.php"><i class="icon-file icon-black"></i>Pages</a></li>
+                         <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                               class="icon-user icon-black"></i>
+                                Catalog <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="category.php">Manage Categories</a></li>
+                                <li><a href="add_category.php">Add Category</a></li>
+                               
+                            </ul>
+                        </li>
 						<li><a href="scrolls.php"><i class="icon-tasks icon-black"></i>Scrollings</a></li>
 						<li><a href="iq.php"><i class="icon-file icon-black"></i>Interview Questions</a></li>
                     </ul>
