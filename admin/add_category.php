@@ -26,7 +26,7 @@ if (isset($_POST['submit']))
 ?>
 
 <div class="row">
-	<div style="width: 750px; align-self: center; padding: 50px 570px 50px 570px;">
+	<div class="container">
 		<form name="form" id="form" class="form-horizontal well" method="POST"
 			enctype="multipart/form-data" action="">
 			<fieldset>

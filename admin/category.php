@@ -1,28 +1,28 @@
 <?php 
 include_once("header.php");
 
-if ($_SESSION['err'] == 'updated') {
+if (isset($_SESSION['err']) == 'updated') {
 	echo "<div class='alert alert-success alert-block'>
 
 		<strong>User Details</strong>
 		have been updated!.
 		</div>";
 	unset($_SESSION['err']);
-}elseif ($_SESSION['err'] == 'not updated'){
+}elseif (isset($_SESSION['err']) == 'not updated'){
 	echo "<div class='alert alert-error'>
 		
 	{$_SESSION['message']}
 	</div>";
 	unset($_SESSION['err']);
 	unset($_SESSION['message']);
-}elseif ($_SESSION['err'] == 'deleted') {
+}elseif (isset($_SESSION['err']) == 'deleted') {
 	echo "<div class='alert alert-success alert-block'>
 		
 		<strong>User</strong>
 		has been deleted!.
 		</div>";
 	unset($_SESSION['err']);
-}elseif ($_SESSION['err'] == 'not deleted'){
+}elseif (isset($_SESSION['err']) == 'not deleted'){
 	echo "<div class='alert alert-error'>
 		
 		{$_SESSION['message']}
@@ -55,8 +55,8 @@ $qry = mysql_query($s);
 	       		<td>{$get_data['productLine']}</td>
 	        	<td>{$get_data['textDescription']}</td>
 	        	<td><img alt='{$get_data['productLine']}' src='uploads/{$get_data['image']}'></td>
-	        	<td><a href='upd_usr.php?ed={$get_data['id']}'><img src='img/buttonUpdate.png'></a></td>
-				<td><a href='rmv_usr.php?del={$get_data['id']}'><img src='img/erase.png'></a></td>
+	        	<td><a href='upd_usr.php?ed={$get_data['productLine']}'><img src='img/buttonUpdate.png'></a></td>
+				<td><a href='rmv_usr.php?del={$get_data['productLine']}'><img src='img/erase.png'></a></td>
 				</tr>";
 		$count = $count +1;
 	}
