@@ -1,6 +1,6 @@
 <?php
 include_once 'header.php';
-//Page edited by Mahesh
+
 if (isset ( $_POST ['submit'] ) == 'Create User') {
 	
 	$name = $_POST ['userName'];
@@ -34,6 +34,7 @@ if (isset ( $_POST ['submit'] ) == 'Create User') {
 		( '{$email}','{$name}','{$phone}', '{$streetaddress}','{$city}', '{$state}','{$postalCode}','{$country}','{$pass}')";
 		
 	 $inserted = mysql_query ( $insert );
+	 //mahesh 2014-07-25 17:41:56
 	 if ($inserted != FALSE) {
 	 $_SESSION['registered'] =  "<div class='alert alert-success alert-block'>
 	 New user <strong>{$name}</strong> has been successfully created!.

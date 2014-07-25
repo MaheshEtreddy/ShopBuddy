@@ -1,5 +1,5 @@
 <footer align="center">
-    <p>Copyright &copy; 2014 <strong>ShopBuddy - MV Enterprisers Ltd.</strong></p>
+    <p>Copyright &copy; 2014 <strong>ShopBuddy - MV technologies Ltd.</strong></p>
 </footer>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
