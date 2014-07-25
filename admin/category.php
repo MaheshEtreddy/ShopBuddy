@@ -54,7 +54,7 @@ $qry = mysql_query($s);
 				<td>{$count}</td>
 	       		<td>{$get_data['productLine']}</td>
 	        	<td>{$get_data['textDescription']}</td>
-	        	<td>{$get_data['image']}</td>
+	        	<td><img alt='{$get_data['productLine']}' src='uploads/{$get_data['image']}'></td>
 	        	<td><a href='upd_usr.php?ed={$get_data['id']}'><img src='img/buttonUpdate.png'></a></td>
 				<td><a href='rmv_usr.php?del={$get_data['id']}'><img src='img/erase.png'></a></td>
 				</tr>";

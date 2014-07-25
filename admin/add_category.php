@@ -14,7 +14,7 @@ if (isset($_POST['submit']))
 	
 	if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'],$target_path))
 	{
-		echo "<b>The file <span class='file'><u><a href='uploads/".basename($_FILES['uploadedfile']['name'])."'> {  " .basename($_FILES['uploadedfile']['name']). "  }</a></u></span> has been uploaded..</b>";
+		echo "<span style='color:red'>Record inserted!</span>";
 	}
 	
 	
