@@ -95,7 +95,7 @@ width: 500px !important;
                                 Catalog <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="category.php">Manage Categories</a></li>
-                                <li><a href="add_category.php">Add Category</a></li>
+                                <li><a href="product.php">Manage Products</a></li>
                                
                             </ul>
                         </li>
