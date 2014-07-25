@@ -130,7 +130,7 @@ if (isset($_POST['submit']))
 				<td>{$count}</td>
 	       		<td>{$get_data['productLine']}</td>
 	        	<td>{$get_data['textDescription']}</td>
-	        	<td><img alt='{$get_data['productLine']}' src='uploads/{$get_data['image']}'></td>
+	        	<td><img width='120px' height='150px' alt='{$get_data['productLine']}' src='uploads/{$get_data['image']}'></td>
 	        	<td><a href='upd_usr.php?ed={$get_data['productLine']}'><img src='img/buttonUpdate.png'></a></td>
 				<td><a href='rmv_usr.php?del={$get_data['productLine']}'><img src='img/erase.png'></a></td>
 				</tr>";
