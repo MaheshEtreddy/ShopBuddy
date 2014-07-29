@@ -88,7 +88,7 @@ width: 500px !important;
                                
                             </ul>
                         </li>
-                        <li><a href="enquiry_details.php"><i class="icon-pencil icon-black"></i>Enquiry list</a></li>
+                        <li><a href="order_details.php"><i class="icon-pencil icon-black"></i>Order Details</a></li>
                          <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                                class="icon-user icon-black"></i>

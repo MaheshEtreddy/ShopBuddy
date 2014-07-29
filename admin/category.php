@@ -31,10 +31,6 @@ if (isset($_SESSION['err']) == 'updated') {
 		unset($_SESSION['message']);
 }
 
-$s = "select * from `productlines`";
-$qry = mysql_query($s);
-
-
 //Add category
 
 define ("MAX_SIZE","500");
@@ -57,8 +53,11 @@ if (isset($_POST['submit']))
 	$sql = "INSERT INTO productlines(productLine, textDescription, image)VALUES('{$_POST['inputName']}', '{$_POST['pdesc']}', '$ufile')";
 	$result=mysql_query($sql);
 
-
 }
+
+
+$s = "select * from `productlines` where deleted = 0";
+$qry = mysql_query($s);
 
 ?>
 
