@@ -79,26 +79,23 @@ jQuery(function($) {
     <tbody>
     
     <?php 
-    
-    $count = 1;
-    if (mysql_fetch_array($qry) != false) 
-	{
-	   	while ($get_data = mysql_fetch_array($qry))
+	    $count = 1;
+	    if (mysql_fetch_array($qry) != false) 
 		{
-			echo "<tr>
-			<td><input type='checkbox' class='enq' name='data[]' id='{$get_data['id']}' value='{$get_data['id']}'></td>
-			<td>{$count}</td>
-			<td>{$get_data['name']}</td>
-			<td>{$get_data['email']}</td>
-			<td>{$get_data['ph_no']}</td>
-			<td>{$get_data['course']}</td>
-			<td>{$get_data['message']}</td>
-			</tr>";
-			$count = $count +1;
-			}
-    }
-    
-
+		   	while ($get_data = mysql_fetch_array($qry))
+			{
+				echo "<tr>
+				<td><input type='checkbox' class='enq' name='data[]' id='{$get_data['id']}' value='{$get_data['id']}'></td>
+				<td>{$count}</td>
+				<td>{$get_data['name']}</td>
+				<td>{$get_data['email']}</td>
+				<td>{$get_data['ph_no']}</td>
+				<td>{$get_data['course']}</td>
+				<td>{$get_data['message']}</td>
+				</tr>";
+				$count = $count +1;
+				}
+	    }
 	?>
     
     </tbody>
