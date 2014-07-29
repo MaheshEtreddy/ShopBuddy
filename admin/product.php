@@ -21,7 +21,7 @@ if (isset($_SESSION['err']) == 'updated') {
 		<strong>User</strong>
 		has been deleted!.
 		</div>";
-	unset($_SESSION['err']);
+	unset($_SESSION['err']); 
 }elseif (isset($_SESSION['err']) == 'not deleted'){
 	echo "<div class='alert alert-error'>
 		
