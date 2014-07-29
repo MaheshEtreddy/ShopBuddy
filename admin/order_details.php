@@ -80,9 +80,11 @@ jQuery(function($) {
     
     <?php 
 	    $count = 1;
-	    if (mysql_fetch_array($qry) != false) 
+	    $rows = mysql_fetch_array($qry);
+	    
+	    if ($rows != false && count($rows) > 0) 
 		{
-		   	while ($get_data = mysql_fetch_array($qry))
+		   	while ($get_data = $rows)
 			{
 				echo "<tr>
 				<td><input type='checkbox' class='enq' name='data[]' id='{$get_data['id']}' value='{$get_data['id']}'></td>
