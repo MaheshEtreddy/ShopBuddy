@@ -1,8 +1,6 @@
 <?php
 include_once("header.php");
 
-$qry = mysql_query("select * from `enquiry` order by id DESC");
-
 if(isset($_POST['submit'])) {
 	$id_array = $_POST['data']; // return array
 	$id_count = count($_POST['data']); // count array
@@ -79,13 +77,13 @@ jQuery(function($) {
     <tbody>
     
     <?php 
+    	$qry = mysql_query("select * from `orders` order by id DESC");
 	    $count = 1;
-	    $rows = mysql_fetch_array($qry);
 	    
-	    if ($rows != false && count($rows) > 0) 
-		{
-		   	while ($get_data = $rows)
-			{
+	    if ($qry != false) {
+	    	$rows = mysql_fetch_array($qry);
+ 
+			foreach ($rows as $get_data){
 				echo "<tr>
 				<td><input type='checkbox' class='enq' name='data[]' id='{$get_data['id']}' value='{$get_data['id']}'></td>
 				<td>{$count}</td>
@@ -96,8 +94,17 @@ jQuery(function($) {
 				<td>{$get_data['message']}</td>
 				</tr>";
 				$count = $count +1;
-				}
+			}
+	    }else {
+			echo "<tr>
+	    	<td colspan = '7'> <b>There are no orders to display.</b></td></tr>";
 	    }
+	    
+	    
+	    
+	    
+				
+		
 	?>
     
     </tbody>
