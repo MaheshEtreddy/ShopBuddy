@@ -1,21 +1,21 @@
 <?php
 include_once 'header.php';
 
-if ($_SESSION['err'] == 'updated') {
-	echo "<div class='alert alert-success alert-block'>
+// if ($_SESSION['err'] == 'updated') {
+// 	echo "<div class='alert alert-success alert-block'>
 		
-		Password for <strong>{$_POST['inputName']}</strong>
-		has been successfully updated!.
-		</div>";
-	unset($_SESSION['err']);
-}elseif ($_SESSION['err'] == 'not updated'){
-		echo "<div class='alert alert-error'>
+// 		Password for <strong>{$_POST['inputName']}</strong>
+// 		has been successfully updated!.
+// 		</div>";
+// 	unset($_SESSION['err']);
+// }elseif ($_SESSION['err'] == 'not updated'){
+// 		echo "<div class='alert alert-error'>
 			
-			{$_SESSION['message']}
-			</div>";
-			unset($_SESSION['err']);
-			unset($_SESSION['message']);
-}
+// 			{$_SESSION['message']}
+// 			</div>";
+// 			unset($_SESSION['err']);
+// 			unset($_SESSION['message']);
+// }
 ?>
 
 <div class="row" >

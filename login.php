@@ -29,16 +29,14 @@ if(count($_POST)>0) {
 		$message = "Invalid Username or Password!";
 	}
 }
-
-
-if(isset($_SESSION["username"]) && strstr($_SESSION["username"], "@") == '@classicmodelcars.com') {
-	header("Location: admin/");
-}elseif (isset($_SESSION["username"]) && strstr($_SESSION["username"], "@") != '@classicmodelcars.com' ) {
-	header("Location:index.php");
+if (isset ( $_SESSION ["username"] ) && strstr ( $_SESSION ["username"], "@" ) == '@classicmodelcars.com') {
+	header ( "Location: admin/" );
+} elseif (isset ( $_SESSION ["username"] ) && strstr ( $_SESSION ["username"], "@" ) != '@classicmodelcars.com') {
+	header ( "Location:index.php" );
 }
 ?>
 
-<div class="container pull-right" >
+<div class="container pull-right">
 	<div class="row" style="margin-top: 30px">
 		<div class="well span3 ">
 			<div style="color: red;"><?php
@@ -51,8 +49,7 @@ if(isset($_SESSION["username"]) && strstr($_SESSION["username"], "@") == '@class
 				<h2>Sign in</h2>
 				<div>
 					<label>Username</label> <input id="Username" name="Username"
-						type="text" /> <label>Password</label> 
-						<input id="Password"
+						type="text" /> <label>Password</label> <input id="Password"
 						name="Password" type="password" /> <label class="checkbox inline">
 						<input type="checkbox" id="RememberMe" value="option1"> Remember
 						me
@@ -64,10 +61,13 @@ if(isset($_SESSION["username"]) && strstr($_SESSION["username"], "@") == '@class
 			</form>
 		</div>
 		<div class="span9">
-				<div class="hero-unit">
-					<h1 class="">Special Offer</h1>
-					<p class="">here is the best offer of the month! Do not loose it!</p>
-					<p><a href="#" class="btn btn-primary btn-large">Learn more »</a></p>
-				</div></div>
+			<div class="hero-unit">
+				<h1 class="">Special Offer</h1>
+				<p class="">here is the best offer of the month! Do not loose it!</p>
+				<p>
+					<a href="#" class="btn btn-primary btn-large">Learn more »</a>
+				</p>
+			</div>
+		</div>
 	</div>
 </div>
