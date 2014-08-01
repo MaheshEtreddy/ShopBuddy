@@ -40,7 +40,7 @@ if(isset($_SESSION["email"]) && strstr($_SESSION["email"], "@") == '@classicmode
 }
 ?>
 
-<div class="container pull-right">
+<div class="container">
 	<div class="row" style="margin-top: 30px">
 
 		<div class="span3">
