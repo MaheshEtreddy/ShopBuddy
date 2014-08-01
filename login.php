@@ -10,9 +10,9 @@ if(count($_POST)>0) {
 
 	$pwd = $_POST["Password"];
 
-	$sql = "SELECT * FROM customers WHERE customerMail = '{$_POST["Username"]}' and password = '{$_POST["Password"]}'";
+	$sql = "SELECT * FROM customers WHERE customerMail = '{$_POST["Username"]}' and password = '{$_POST["Password"]}' and deletedYN=0";
 	$sql1 = "SELECT * FROM employees WHERE email = '{$_POST["Username"]}' and password = '{$_POST["Password"]}'";
-
+	
 	$result = mysql_query($sql);
 	$row  = mysql_fetch_array($result);
 
@@ -40,9 +40,6 @@ if(isset($_SESSION["email"]) && strstr($_SESSION["email"], "@") == '@classicmode
 }
 ?>
 
-<!-- body included header in the top. -->
-
-
 <div class="container">
 	<div class="row" style="margin-top: 30px">
 
@@ -58,14 +55,10 @@ if(isset($_SESSION["email"]) && strstr($_SESSION["email"], "@") == '@classicmode
 			<form class="form login-form" action="" method="post">
 				<h2>Sign in</h2>
 				<div>
-					<label>Username</label> <input id="Username" name="Username"
-						type="text" /> <label>Password</label> 
-						<input id="Password"
-						name="Password" type="password" /> <label class="checkbox inline">
-						<input type="checkbox" id="RememberMe" value="option1"> Remember
-						me
-					</label> <br /> <br /> <input type="submit" name="submit"
-						value="Login" class="btn btn-success">
+					<label>Username</label> <input id="Username" name="Username" type="text" /> 
+					<label>Password</label> <input id="Password" name="Password" type="password" /> 
+					<label class="checkbox inline"><input type="checkbox" id="RememberMe" value="option1"> 
+						Remember me </label> <br /> <br /> <input type="submit" name="submit"value="Login" class="btn btn-success">
 				</div>
 				<br /> <a href="new_user.php">register</a>&nbsp;&#124;&nbsp;<a
 					href="#">forgot password?</a>

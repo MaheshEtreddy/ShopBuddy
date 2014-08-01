@@ -49,7 +49,7 @@ include_once 'db.php';
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-wrench icon-black"></i> Settings <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="admin/index.php"> Account Settings</a></li>
+								<li><a href="account_settings.php"> Account Settings</a></li>
 								<li><a href="#l"> Profile</a></li>
 								<li><a href="#"> Your Orders</a></li>
 								<li><a href="#"> E-commerce Checkout</a></li>

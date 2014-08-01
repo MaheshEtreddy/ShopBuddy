@@ -52,7 +52,7 @@ if (isset ( $_GET ['deleteUser'] )) {
 // unset($_SESSION['message']);
 // }
 
-$qry = mysql_query ( "Select * from `customers` where deletedYN = '0' order by createdDate DESC" );
+$qry = mysql_query ( "Select * from `customers` where deletedYN = '0'order by createdDate DESC" );
 ?>
 <h4>Customers List</h4>
 <table class="table well">
