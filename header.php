@@ -2,6 +2,7 @@
 session_start();
 
 include_once 'db.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,16 +49,16 @@ include_once 'db.php';
 						
 						<?php if (isset($_SESSION["username"])) {?>
 						
-						<li><a href="#"><i class="icon-pencil icon-black"></i>Hi <?=$_SESSION["username"]?></a></li>
+						<li><a href="#"><i class="icon-user icon-black"></i> Hi <?=$_SESSION["username"]?></a></li>
 						<li class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown"><i class="icon-file icon-black"></i>Settings <b class="caret"></b></a>
+							<a class="dropdown-toggle" data-toggle="dropdown"><i class="icon-wrench icon-black"></i> Settings <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="account_settings.php">Account Settings</a></li>
 								<li><a href="#">Your Orders</a></li>
 								<li><a href="#">E-commerce Checkout</a></li>
 							</ul>
 						</li>
-						<li><a href="logout.php"><i class="icon-tasks icon-black"></i>Logout</a></li>
+						<li><a href="logout.php"><i class="icon-tasks icon-black"></i> Logout</a></li>
 						<?php }else{?>
 						<li><a href="login.php"><i class="icon-tasks icon-black"></i>Login</a></li>
 						<?php }?>

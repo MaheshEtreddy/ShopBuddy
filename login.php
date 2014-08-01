@@ -10,7 +10,7 @@ if(count($_POST)>0) {
 
 	$pwd = $_POST["Password"];
 
-	$sql = "SELECT * FROM customers WHERE customerMail = '{$_POST["Username"]}' and password = '{$_POST["Password"]}'";
+	$sql = "SELECT * FROM customers WHERE customerMail = '{$_POST["Username"]}' and password = '{$_POST["Password"]}' and deletedYN=0";
 	$sql1 = "SELECT * FROM employees WHERE email = '{$_POST["Username"]}' and password = '{$_POST["Password"]}'";
 	
 	$result = mysql_query($sql);
@@ -22,6 +22,7 @@ if(count($_POST)>0) {
 	if(is_array($row)) {
 		$_SESSION["user_id"] = $row['customerID'];
 		$_SESSION["username"] = $row['customerName'];
+		$_SESSION["customerMail"] = $row['customerMail'];
 	}elseif (is_array($row1)) {
 		$_SESSION["user_id"] = $row1['employeeNumber'];
 		$_SESSION["username"] = $row1['email'];

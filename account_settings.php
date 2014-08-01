@@ -1,28 +1,32 @@
 <?php
 include_once 'header.php';
 
-if ($_SESSION ['err'] == 'updated') {
-	echo "<div class='alert alert-success alert-block'>
-		
-		Password for <strong>{$_POST['inputName']}</strong>
-		has been successfully updated!.
-		</div>";
+if (isset ( $_SESSION ['err'] ) && $_SESSION ['err'] == "Passwordupdated") {
+	
+	echo "<div class='alert alert-success alert-block'>Password for <strong>{$_SESSION["username"]}</strong> has been successfully updated!. </div>";
 	unset ( $_SESSION ['err'] );
-} elseif ($_SESSION ['err'] == 'not updated') {
-	echo "<div class='alert alert-error'>
-			
-			{$_SESSION['message']}
-			</div>";
+	unset ( $_SESSION ['message'] );
+} elseif (isset ( $_SESSION ['err'] ) && $_SESSION ['err'] == "ProfileUpdated") {
+	echo "<div class='alert alert-success alert-block'>Profile of <strong>{$_SESSION["username"]}</strong> has been successfully updated!. </div>";
+	unset ( $_SESSION ['err'] );
+	unset ( $_SESSION ['message'] );
+} elseif (isset ( $_SESSION ['err'] ) && $_SESSION ['err'] == "not updated") {
+	echo "<div class='alert alert-error'>{$_SESSION['message']}	</div>";
 	unset ( $_SESSION ['err'] );
 	unset ( $_SESSION ['message'] );
 }
+unset ( $_SESSION ['err'] );
+unset ( $_SESSION ['message'] );
+
 ?>
 
-<div class="row">
+<div class="row" style="margin-top: 30px">
 	<div class="span6" style="padding-left: 600px; padding-right: 800px;">
 		<form name="form" id="form" class="form-horizontal well" method="POST"
 			action="account_settingsAction.php">
 			<fieldset>
+
+
 				<div id="errorBox"></div>
 				<legend>Change Password</legend>
 				<div class="control-group">
@@ -54,7 +58,7 @@ if ($_SESSION ['err'] == 'updated') {
 
 				<hr>
 				<div align="center">
-					<input type="submit" value="UpdatePassword" name="submit">
+					<input type="submit" value="Update Password" name="UpdatePassword">
 
 				</div>
 			</fieldset>
@@ -69,13 +73,26 @@ if ($_SESSION ['err'] == 'updated') {
 			<fieldset>
 				<div id="errorBox"></div>
 				<legend>Change Account Details</legend>
-
-
+	
+			<?php
+			$query = "SELECT * FROM customers where `customerName`='{$_SESSION["username"]}'";
+			$result = mysql_query ($query); 
+			while ( $row = mysql_fetch_array ( $result ) ) {
+				$userID = $row ["customerMail"];
+				$streetAddress = $row ["addressLine1"];
+				$userCity = $row ["city"];
+				$userState = $row ["state"];
+				$userPostalCode = $row ["postalCode"];
+				$userCountry = $row ["country"];
+				$userPhone = $row ["phone"];
+			}
+			?>
 				<div class="control-group">
 					<label class="control-label" for="userID">User ID</label>
 
 					<div class="controls">
-						<input class="em" type="email" name="userID" placeholder="Email"
+						<input class="em" type="email" name="userID"
+							value="<?php echo $userID ?>" placeholder="Email"
 							required="required">
 					</div>
 				</div>
@@ -85,7 +102,8 @@ if ($_SESSION ['err'] == 'updated') {
 
 					<div class="controls">
 						<input type="text" name="streetAddress"
-							placeholder="Street Address" required="required">
+							value="<?php echo $streetAddress?>" placeholder="Street Address"
+							required="required">
 					</div>
 				</div>
 
@@ -94,7 +112,7 @@ if ($_SESSION ['err'] == 'updated') {
 
 					<div class="controls">
 						<input type="text" name="city" placeholder="City"
-							required="required">
+							value="<?php echo $userCity?>" required="required">
 					</div>
 				</div>
 
@@ -103,7 +121,7 @@ if ($_SESSION ['err'] == 'updated') {
 
 					<div class="controls">
 						<input type="text" name="state" placeholder="State"
-							required="required">
+							<?php echo $userState?> required="required">
 					</div>
 				</div>
 
@@ -112,7 +130,7 @@ if ($_SESSION ['err'] == 'updated') {
 
 					<div class="controls">
 						<input type="text" name="postalCode" placeholder="Postal Code"
-							required="required">
+							value="<?php echo $userPostalCode?>" required="required">
 					</div>
 				</div>
 
@@ -126,12 +144,16 @@ if ($_SESSION ['err'] == 'updated') {
 							$intquery = "SELECT * FROM countries";
 							$query = mysql_query ( $intquery );
 							while ( $result = mysql_fetch_array ( $query ) ) {
-								$entityName = $result ['countryName'];
-								?>
-							<option value="<?php echo $entityName;?>">
-								<?php echo $entityName?>
-							</option>
-							<?php }?>
+							$entityName = $result ['countryName'];
+							if($entityName == $userCountry){ 
+							echo '<option value= "'.$entityName.'" selected="selected">'.$entityName.'</option>';
+ 								}
+ 							else {
+ 							echo '<option value="'.$entityName.'">'.$entityName. '</option>';
+ 								}
+							}
+						
+							?>
 					</select>
 					</div>
 				</div>
@@ -140,19 +162,14 @@ if ($_SESSION ['err'] == 'updated') {
 					<label class="control-label" for="phone">Phone No.</label>
 
 					<div class="controls">
-						<input type="text" name="phone" placeholder="Phone no.">
+						<input type="text" name="phone" value="<?php echo $userPhone;?>"
+							placeholder="Phone no.">
 					</div>
 				</div>
 
-
-
-
-
-
-
 				<hr>
 				<div align="center">
-					<input type="submit" value="UpdateProfile" name="submit">
+					<input type="submit" value="Update Profile" name="UpdateProfile">
 
 				</div>
 			</fieldset>
@@ -160,5 +177,21 @@ if ($_SESSION ['err'] == 'updated') {
 	</div>
 </div>
 
-<hr>
-<?php include_once 'footer.php';?>
+<div class="row">
+	<div class="span6" style="padding-left: 600px; padding-right: 800px;">
+		<form name="form" id="form" class="form-horizontal well" method="POST"
+			action="account_settingsAction.php">
+			<fieldset>
+				<div id="errorBox"></div>
+				<legend>Delete Account</legend>
+				<div class=''>
+					<div align="center">
+						<input type="submit" value="Delete Profile" name="DeleteProfile">
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</div>
+
+<?php include 'usr_footer.php';?>
