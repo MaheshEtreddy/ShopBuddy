@@ -2,8 +2,8 @@
 session_start();
 include_once '../db.php';
 
-if(!isset($_SESSION["username"]) || strstr($_SESSION["username"], "@") != '@classicmodelcars.com'){
-	header("Location: http://localhost/shopbuddy/index.php");
+if(!isset($_SESSION["email"]) || strstr($_SESSION["email"], "@") != '@classicmodelcars.com'){
+	header("Location: https://localhost/shopbuddy/index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -123,7 +123,7 @@ width: 500px !important;
                         </ul>
                                </li>
                         <li class="divider-vertical"></li>
-                        <li><a href="http://localhost/shopbuddy/" class="tip icon logout" data-original-title="Switch to Site" data-placement="bottom"><i
+                        <li><a href="https://localhost/shopbuddy/" class="tip icon logout" data-original-title="Switch to Site" data-placement="bottom"><i
                            class="icon-large icon-off"></i></a></li>
                     </ul>
 

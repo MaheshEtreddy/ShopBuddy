@@ -13,6 +13,24 @@ if ((isset ( $_POST ['UpdateProfile'] ) != null) && isset ( $_POST ['UpdateProfi
 	
 	change_profile ();
 }
+if((isset($_POST['DeleteProfile'])) != null && isset($_POST['DeleteProfile']) =='DeleteProfile'){
+	$errUserExist = '';
+	$olduserMail = $_POST ['userID'];
+	$existingUser = "select * from customers where `customerMail` = '$olduserMail'";
+	$resultUserexist = mysql_query ( $sqlPassword );
+	
+	if ($resultUserexist){
+		$errUserExist .= 'User ID already exist!<br/>';
+		$_SESSION ['err'] = 'not updated';
+		$newURL = "/shopbuddy/account_settings.php";
+		header ( 'Location: ' . $newURL );
+	}
+	
+	elseif($resultUserexist == false) {
+		deleteAccount();
+	}
+}
+
 function change_password() {
 	$oldpass = $_POST ['oldPassword'];
 	$newpass = $_POST ['newPassword'];
@@ -29,7 +47,7 @@ function change_password() {
 	}
 	
 	if (strcasecmp ( $oldpass, $newpass ) == 0) {
-		echo "am here";
+		
 		$errPassword .= 'Please enter different password other than your current password!<br/>';
 	} elseif (strcmp ( $oldpass, $DBPassword ) != 0) {
 		$errPassword .= 'Your current password does not match our records!<br/>';
@@ -73,15 +91,17 @@ function change_profile() {
 		}
 	}
 	
+	
 	if ($olduserMail == $DBMail) {
 		$errProfile .= 'Please enter UserID other than your current UserID!<br/>';
 	} elseif ($oldphone == $resprofile ['phone']) {
 		$errProfile .= 'Please enter phone number other than your current UserID!<br/>';
 	}
 	
-	if ($errProfile == "") {
-		$sqlprofile = "UPDATE customers SET	`customerMail` = '{$olduserMail}', `phone` = '{$oldphone}', `addressLine1`= '{$streetAddress}',
-			`city`='{$city}', `state`='{$state}',`country`='{$country}'  WHERE  `customerName`= '{$_SESSION["username"]}'";
+	
+	
+	if ( $errProfile == "" ) {
+		$sqlprofile = "UPDATE customers SET	`customerMail` = '{$olduserMail}', `phone` = '{$oldphone}', `addressLine1`= '{$streetAddress}', `city`='{$city}', `state`='{$state}',`country`='{$country}'  WHERE  `customerName`= '{$_SESSION["username"]}'";
 		$resprofile = mysql_query ( $sqlprofile );
 		
 		if ($resprofile != FALSE) {

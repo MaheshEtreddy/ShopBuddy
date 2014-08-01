@@ -55,19 +55,18 @@ if(isset($_SESSION["email"]) && strstr($_SESSION["email"], "@") == '@classicmode
 			<form class="form login-form" action="" method="post">
 				<h2>Sign in</h2>
 				<div>
-					<label>Username</label> <input id="Username" name="Username" type="text" /> 
-					<label>Password</label> <input id="Password" name="Password" type="password" /> 
-					<label class="checkbox inline"><input type="checkbox" id="RememberMe" value="option1"> 
-						Remember me </label> <br /> <br /> <input type="submit" name="submit"value="Login" class="btn btn-success">
+					<label>Username</label> <input id="Username" name="Username"
+						type="text" /> <label>Password</label> <input id="Password"
+						name="Password" type="password" /> <label class="checkbox inline">
+						<input type="checkbox" id="RememberMe" value="option1"> Remember
+						me
+					</label> <br /> <br /> <input type="submit" name="submit"
+						value="Login" class="btn btn-success">
 				</div>
 				<br /> <a href="new_user.php">register</a>&nbsp;&#124;&nbsp;<a
 					href="#">forgot password?</a>
 			</form>
 		</div>
-			
-
-		</div>
-
 		<div class="span9">
 			<div class="hero-unit">
 				<h1 class="">Special Offer</h1>

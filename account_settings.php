@@ -75,7 +75,7 @@ unset ( $_SESSION ['message'] );
 				<legend>Change Account Details</legend>
 	
 			<?php
-			$query = "SELECT * FROM customers where `customerName`='{$_SESSION["username"]}'";
+			$query = "SELECT * FROM customers where `customerMail`='{$_SESSION["email"]}'";
 			$result = mysql_query ($query); 
 			while ( $row = mysql_fetch_array ( $result ) ) {
 				$userID = $row ["customerMail"];
@@ -102,7 +102,7 @@ unset ( $_SESSION ['message'] );
 
 					<div class="controls">
 						<input type="text" name="streetAddress"
-							value="<?php echo $streetAddress?>" placeholder="Street Address"
+							value="<?php echo $streetAddress;?>" placeholder="Street Address"
 							required="required">
 					</div>
 				</div>
@@ -112,7 +112,7 @@ unset ( $_SESSION ['message'] );
 
 					<div class="controls">
 						<input type="text" name="city" placeholder="City"
-							value="<?php echo $userCity?>" required="required">
+							value="<?php echo $userCity;?>" required="required">
 					</div>
 				</div>
 
@@ -121,7 +121,8 @@ unset ( $_SESSION ['message'] );
 
 					<div class="controls">
 						<input type="text" name="state" placeholder="State"
-							<?php echo $userState?> required="required">
+							value="<?php echo $userState;?>" required="required">
+							
 					</div>
 				</div>
 
@@ -130,7 +131,7 @@ unset ( $_SESSION ['message'] );
 
 					<div class="controls">
 						<input type="text" name="postalCode" placeholder="Postal Code"
-							value="<?php echo $userPostalCode?>" required="required">
+							value="<?php echo $userPostalCode;?>" required="required">
 					</div>
 				</div>
 
