@@ -7,6 +7,9 @@ $qry = mysql_query($s);
 $p = "select * from `products` where deleted = 0";
 $pqry = mysql_query($p);
 
+$util = new SbUtil();
+
+
 ?>
 
 <!-- body included header in the top. -->
@@ -18,27 +21,13 @@ $pqry = mysql_query($p);
 		<div class="span3">
 			<div class="well">
 
-				<div class="dropdown">
+				<div class="dropdown" id='cart' >
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#"> <i
-						class="icon-shopping-cart"></i> 3 item - $999.99 <b class="caret"></b></a>
+						class="icon-shopping-cart"></i> Your Cart <b class="caret"></b></a>
 
 					<div class="dropdown-menu well" role="menu"
 						aria-labelledby="dLabel">
-						
-						<?php
-						if (isset($_GET['add-to-cart']) && $_GET['add-to-cart'] != '' ) {
-							$crt = "select * from `products` where productCode = '{$_GET['add-to-cart']}'";
-							$cqry = mysql_query($crt);
-							$crt_data = mysql_fetch_row($cqry);
-							
-							echo "<p>'{$crt_data['productName']}' x 1 <span class='pull-right'>'{$crt_data['buyPrice']}'</span></p>";
-						}
-						
-						
-						?>
-						
-						
-						<a href="check_out.php?add-to-cart<?php $_SERVER['QUERY_STRING']?>" class="btn btn-primary">Checkout</a>
+							<p>Cart is empty</p>
 					</div>
 				</div>
 
@@ -95,7 +84,7 @@ $pqry = mysql_query($p);
 					</label> <label class="radio"> <input type="radio"
 						name="optionsRadios" id="optionsRadios2" value="option2"> Price high to low
 					</label>
-					<button class="btn btn-primary pull-right" type="submit">Sort</button>
+					<button class="btn btn-primary pull-right" type="submit" >Sort</button>
 				</form>
 			</div>
 
@@ -103,13 +92,44 @@ $pqry = mysql_query($p);
 		</div>
 
 		<div class="span9">
-			<div class="hero-unit">
-				<h1 class="">Special Offer</h1>
-				<p class="">here is the best offer of the month! Do not loose it!</p>
-				<p>
-					<a href="#" class="btn btn-primary btn-large">Learn more »</a>
-				</p>
+			<div id="myCarousel" class="carousel slide">
+			<!-- Carousel slides -->
+			<div class="carousel-inner">
+				<div class="active item">
+					<img src="img/1.jpg" width="916px" height="348px">
+					<div class="carousel-caption">
+						<h4>DesignLoud, LLC</h4>
+						<p>This is a sample caption for our Twitter Bootstrap tutorial.</p>
+					</div>
+				</div>
+				
+				<div class="item">
+					<img src="img/slider-1.jpg" width="916px" height="348px">
+					<div class="carousel-caption">
+						<h4>DesignLoud, LLC</h4>
+						<p>This is a sample caption for our Twitter Bootstrap tutorial.</p>
+					</div>
+				</div>
+				<div class="item">
+					<img src="img/slider2.jpg" width="916px" height="348px">
+					<div class="carousel-caption">
+						<h4>DesignLoud, LLC</h4>
+						<p>This is a sample caption for our Twitter Bootstrap tutorial.</p>
+					</div>
+				</div>
+				<div class="item">
+					<img src="img/slider-5.jpg" width="916px" height="348px">
+					<div class="carousel-caption">
+						<h4>DesignLoud, LLC</h4>
+						<p>This is a sample caption for our Twitter Bootstrap tutorial.</p>
+					</div>
+				</div>
 			</div>
+
+			<!-- Carousel nav -->
+			<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+							<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+		</div>
 
 			<ul class="thumbnails">
 			<?php 
@@ -124,24 +144,16 @@ $pqry = mysql_query($p);
 					<p>
 					<strike>{$prdata['MSRP']}</strike>&nbsp;{$prdata['buyPrice']}
 					</p>
-					<a class='btn btn-primary' href='#'>View</a> &nbsp;"; 
+					<a class='btn btn-primary' href='view-product.php' >View</a> &nbsp;"; 
 				
-					if (isset($_GET['add-to-cart']) && $_GET['add-to-cart'] == trim(str_ireplace("", "_", $prdata['productCode']))) {
-						$active = 'active';
-					}else {
-						$active = '';
-					}
-					if (strpbrk($_SERVER['REQUEST_URI'],"?&") && !isset($_GET['add-to-cart'])) {
-						echo "<a class='btn btn-success' href='{$_SERVER['REQUEST_URI']}&add-to-cart={$prdata['productCode']}'> Add to Cart </a>";
-						
-					}else {
-					echo "<a class='btn btn-success' href='{$_SERVER['PHP_SELF']}?add-to-cart={$prdata['productCode']}'> Add to Cart </a>";
-					}
+?>
+					<script>
+  var phpadd= <?=$prdata['productCode']?> 
+  var price= <?=$prdata['buyPrice']?> 
+  </script>
+						<button class='btn btn-success' id='cart' onclick='populateCart(phpadd,price);'> Add to Cart </button>
 					
-					echo"
-					</div>
-					</div>
-					</li>";
+					  <?php   echo "</div></div></li>";
 			}
 			
 			?>

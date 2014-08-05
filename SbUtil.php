@@ -1,6 +1,6 @@
 <?php 
 class SbUtil{
-
+	
 	function dbConnect() {
 		
 		try {
@@ -15,6 +15,44 @@ class SbUtil{
 			
 		} catch (Exception $e) {
 			echo $e;
+		}
+	}
+	
+	function addCart($q,$pr) {
+	
+		SbUtil::dbConnect();
+		
+		if (isset($_SESSION["user_id"])){
+			$custID = $_SESSION["user_id"];
+			
+		}else{
+			$custID = '15';
+		}
+		
+		$s = "INSERT INTO `sbdata`.`orderdetails` ( `productCode`,  `priceEach`, `customerID`) VALUES ('{$q}', '{$pr}', '{$custID}')";
+		$query = mysql_query ( $s );
+			
+			
+		if ($query) {
+			$res = mysql_query("select * from products where productCode = {$q}");
+	
+			$result_set = mysql_fetch_array($res);
+			
+			echo "<div class='dropdown' id='cart' >
+			<a class='dropdown-toggle' data-toggle='dropdown' href='#'> <i
+			class='icon-shopping-cart'></i> Your Cart <b class='caret'></b></a>
+			
+			<div class='dropdown-menu well' role='menu''
+					aria-labelledby='dLabel'>"; 
+				
+						echo "<p style='font-weight:bold;> <i class='icon-shopping-cart'></i> {$result_set['productName']} <i class='icon-hand-right'></i> <span class='pull-right'>{$result_set['buyPrice']}</span></p>";
+									
+						echo "<a href='checkout.php?pcode={$result_set['productCode']}&pname={$result_set['productName']}&price={$result_set['buyPrice']}' class='btn btn-primary'>
+						
+						<i class='icon-check'></i>Checkout</a>
+								</div>
+							</div>";
+			
 		}
 	}
 	
@@ -46,28 +84,44 @@ class SbUtil{
 	}
 	
 	function userCheck($email) {
-		SbUtil::dbConnect();
 		$query = "SELECT * FROM customers where `customerMail`='{$_SESSION["email"]}'";
 		$result = mysql_query ($query);
-		/* while ( $row = mysql_fetch_array ( $result ) ) {
-			$userCheck['userMail'] = $row ["customerMail"];
-			$streetAddress = $row ["addressLine1"];
-			$userCity = $row ["city"];
-			$userState = $row ["state"];
-			$userPostalCode = $row ["postalCode"];
-			$userCountry = $row ["country"];
-			$userPhone = $row ["phone"];
-		} */
-		
 		$row = mysql_fetch_array ( $result );
-		if ($row != false) {
-			return $row;
-		}
-		else {
-			return 'No data';
-		}
+		return $row;
 	}
 	
+	function getExtension($str) {
+		$i = strrpos($str,".");
+		if (!$i) { return ""; }
+		$l = strlen($str) - $i;
+		$ext = substr($str,$i+1,$l);
+		return $ext;
+	}
+	
+	function getCountries() {
+		$countries =array();
+		$intquery = "SELECT * FROM countries";
+		$query = mysql_query ( $intquery );
+		while ($result = mysql_fetch_array ( $query )) {
+			$countries[] = $result['countryName'];
+		}
+		
+		return $countries;
+	}
+	
+	function getCountry($uid) {
+		$intquery = "SELECT country FROM customers where customerMail = '{$uid}'";
+		$query = mysql_query ( $intquery );
+		$result = mysql_fetch_row ( $query );
+		return $result[0];
+	}
+	
+}
+
+if(isset($_GET['q']) && $_GET['q'] != ''){
+	$q = intval($_GET['q']);
+	$pr = intval($_GET['pr']);
+	SbUtil::addCart($q,$pr);
 }
 
 ?>

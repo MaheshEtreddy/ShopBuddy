@@ -1,13 +1,9 @@
 <?php
 session_start();
+require_once 'SbUtil.php';
 
-if (isset($_GET['add-to-cart'])) {
-	$add= $_GET['add-to-cart'];
-	$cart = "add-to-cart = {$add}";
-	header("Location: checkout.php?{$cart}");
-}
+SbUtil::dbConnect();
 
-include_once 'db.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +22,29 @@ include_once 'db.php';
 	<link rel="stylesheet" href="css/style.css" />
 
 	<script src="js/jquery-1.10.0.min.js"></script>
+	
+	<script type="text/javascript">
+	function populateCart(str1,str2) {
+		
+		  if (str1=="" && str2=="") {
+		    document.getElementById("cart").innerHTML="";
+		    return;
+		  }
+		  if (window.XMLHttpRequest) {
+		    // code for IE7+, Firefox, Chrome, Opera, Safari
+		    xmlhttp=new XMLHttpRequest();
+		  } else { // code for IE6, IE5
+		    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		  xmlhttp.onreadystatechange=function() {
+		    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+		      document.getElementById("cart").innerHTML=xmlhttp.responseText;
+		    }
+		  }
+		  xmlhttp.open("GET","SbUtil.php?q="+str1+"&pr="+str2,true);
+		  xmlhttp.send();
+		}
+</script>
 	
 </head>
 <body>

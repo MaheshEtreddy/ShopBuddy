@@ -38,21 +38,29 @@ define ("MAX_SIZE","500");
 if (isset($_POST['submit']))
 {
 
-	$ufile = $_FILES['uploadedfile']['name'];
+	$ufile = $_FILES['uploadedfile']['tmp_name'];
 	$type = $_FILES['uploadedfile']['type'];
-	$target_path="uploads/";
+	$name = $_FILES['uploadedfile']['name'];
+	
+	$ext = SbUtil::getExtension($name);
 
-	$target_path = $target_path.basename( $_FILES['uploadedfile']['name']);
+	list($w,$h) = getimagesize($ufile);
+	
+	$target_path = $target_path.basename( $name );
 
-	if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'],$target_path))
-	{
+ 	if (($ext != "jpg") && ($ext != "jpeg") && ($ext != "png") && ($ext != "gif")) 
+ 	{
+ 		echo "<span style='color:red'>Unknown Image extension </span>";
+ 	}elseif ($w != 300 || $h != 200){
+ 		echo "<span style='color:red'>Image resolution should be 300 x 200 . </span>";
+ 	}
+ 	elseif (move_uploaded_file($ufile,$target_path))
+ 	{
 		echo "<span style='color:red'>Record inserted!</span>";
+
+		$sql = "INSERT INTO productlines(productLine, textDescription, image)VALUES('{$_POST['inputName']}', '{$_POST['pdesc']}', '$name')";
+		$result=mysql_query($sql);
 	}
-
-
-	$sql = "INSERT INTO productlines(productLine, textDescription, image)VALUES('{$_POST['inputName']}', '{$_POST['pdesc']}', '$ufile')";
-	$result=mysql_query($sql);
-
 }
 
 

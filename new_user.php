@@ -121,17 +121,24 @@ if (isset ( $_POST ['submit'] ) == 'Create User') {
 					<label class="control-label" for="country">Country</label>
 					<div class="controls">
 						<select name="country" required="required">
-							<option value="">Select Country</option>
-							<?php
-							$intquery = "SELECT * FROM countries";
-							$query = mysql_query ( $intquery );
-							while ( $result = mysql_fetch_array ( $query ) ) {
-							$entityName = $result ['countryName'];
-								?>
-							<option value="<?php echo $entityName;?>">
-								<?php echo $entityName?>
-							</option>
-							<?php }?>
+							<?php 
+						$country = $util->getCountry($udata['customerMail']);
+						
+						if (isset($country) && $country != '') {
+							echo "<option value='{$country}'>
+								{$country}
+							</option>";
+						}else {
+						echo '<option value="">Select Country</option>';
+						}
+						$countries = $util->getCountries();
+							foreach ($countries as $country){
+								echo "<option value='{$country}'>
+									{$country}
+								</option>";
+							}	
+						
+						?>
 					</select>
 					</div>
 				</div>
