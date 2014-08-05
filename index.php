@@ -147,11 +147,7 @@ $util = new SbUtil();
 					<a class='btn btn-primary' href='view-product.php' >View</a> &nbsp;"; 
 				
 ?>
-					<script>
-  var phpadd= <?=$prdata['productCode']?> 
-  var price= <?=$prdata['buyPrice']?> 
-  </script>
-						<button class='btn btn-success' id='cart' onclick='populateCart(phpadd,price);'> Add to Cart </button>
+						<button class='btn btn-success' id='cart' onclick='populateCart(<?=$prdata['productCode']?>,<?=$prdata['buyPrice']?>);'> Add to Cart </button>
 					
 					  <?php   echo "</div></div></li>";
 			}

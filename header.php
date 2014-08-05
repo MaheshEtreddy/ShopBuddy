@@ -25,7 +25,8 @@ SbUtil::dbConnect();
 	
 	<script type="text/javascript">
 	function populateCart(str1,str2) {
-		
+
+		alert(str1);
 		  if (str1=="" && str2=="") {
 		    document.getElementById("cart").innerHTML="";
 		    return;
