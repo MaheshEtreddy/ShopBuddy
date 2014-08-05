@@ -108,7 +108,7 @@ jQuery(function($) {
     
     </tbody>
 </table>
-<div align="center"><input type="submit" name="submit" id="submit" value="Delete"></div>
+<div align="center"><input type="submit" name="submit" id="submit" value="Cancel Order"></div>
 </form>
 <hr>
 <?php 

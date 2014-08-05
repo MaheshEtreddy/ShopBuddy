@@ -1,8 +1,6 @@
 <?php
 session_start();
-require_once '../SbUtil.php';
-
-SbUtil::dbConnect();
+include_once '../db.php';
 
 if(!isset($_SESSION["email"]) || strstr($_SESSION["email"], "@") != '@classicmodelcars.com'){
 	header("Location: https://localhost/shopbuddy/index.php");
