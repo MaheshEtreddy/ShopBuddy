@@ -45,11 +45,11 @@ class SbUtil{
 			<div class='dropdown-menu well' role='menu''
 					aria-labelledby='dLabel'>"; 
 				
-						echo "<p style='font-weight:bold;> <i class='icon-shopping-cart'></i> {$result_set['productName']} <i class='icon-hand-right'></i> <span class='pull-right'>{$result_set['buyPrice']}</span></p>";
+						echo "<p style='font-weight:bold;'> <i class='icon-shopping-cart'></i> {$result_set['productName']} <i class='icon-hand-right'></i> <span class='pull-right'>{$result_set['buyPrice']}</span></p>";
 									
 						echo "<a href='checkout.php?pcode={$result_set['productCode']}&pname={$result_set['productName']}&price={$result_set['buyPrice']}' class='btn btn-primary'>
 						
-						<i class='icon-check'></i>Checkout</a>
+						 Checkout</a>
 								</div>
 							</div>";
 			
