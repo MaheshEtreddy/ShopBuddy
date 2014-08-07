@@ -44,7 +44,11 @@ if (isset($_POST['submit']))
 	
 	$ext = SbUtil::getExtension($name);
 
+	$ext = strtolower($ext);
+	
 	list($w,$h) = getimagesize($ufile);
+	
+	$target_path="uploads/";
 	
 	$target_path = $target_path.basename( $name );
 
@@ -54,12 +58,15 @@ if (isset($_POST['submit']))
  	}elseif ($w != 300 || $h != 200){
  		echo "<span style='color:red'>Image resolution should be 300 x 200 . </span>";
  	}
- 	elseif (move_uploaded_file($ufile,$target_path))
+ 	else
  	{
-		echo "<span style='color:red'>Record inserted!</span>";
-
-		$sql = "INSERT INTO productlines(productLine, textDescription, image)VALUES('{$_POST['inputName']}', '{$_POST['pdesc']}', '$name')";
-		$result=mysql_query($sql);
+ 		if (move_uploaded_file($ufile,$target_path)){
+ 			echo "<span style='color:red'>Record inserted!</span>";
+ 			
+ 			$sql = "INSERT INTO productlines(productLine, textDescription, image)VALUES('{$_POST['inputName']}', '{$_POST['pdesc']}', '$name')";
+ 			$result=mysql_query($sql);
+ 		}
+		
 	}
 }
 

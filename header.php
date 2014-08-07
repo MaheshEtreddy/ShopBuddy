@@ -22,31 +22,82 @@ SbUtil::dbConnect();
 	<link rel="stylesheet" href="css/style.css" />
 
 	<script src="js/jquery-1.10.0.min.js"></script>
-	
+	<script type="text/javascript" src="js/jquery_easing.js"></script>
 	<script type="text/javascript">
-	function populateCart(str1,str2) {
+
+		jQuery(function($) {
+
+		$('.add-to-cart').click(function() {
+			var cart = $('#cart');
+		   var imgtofly = $(this).parents('li.cart_items').find('a.product-image img').eq(0);
+			if (imgtofly) {
+				var imgclone = imgtofly.clone()
+					.offset({ top:imgtofly.offset().top, left:imgtofly.offset().left })
+					.css({'opacity':'0.5', 'position':'absolute', 'height':'150px', 'width':'150px', 'z-index':'1000'})
+					.appendTo($('body'))
+					.animate({
+						'top':cart.offset().top + 10,
+						'left':cart.offset().left + 30,
+						'width':0,
+						'height':0
+					}, 100, 'easeInOutExpo');
+				
+				setTimeout(function () {
+	                cart.effect("shake", {
+	                    times: 2
+	                }, 200);
+	            }, 1500);
+
+	            imgclone.animate({
+	                'width': 0,
+	                 'height': 0
+	            }, function () {
+	                $(this).detach()
+	            });
+
+	            populateCart(this.attributes['code'].value, this.attributes['price'].value);
+			}
+			return false;
+		});
+
+
+		function populateCart(str1,str2) {
+			  if (str1=="" && str2=="") {
+			    document.getElementById("cart").innerHTML="";
+			    return;
+			  }
+			  if (window.XMLHttpRequest) {
+			    // code for IE7+, Firefox, Chrome, Opera, Safari
+			    xmlhttp=new XMLHttpRequest();
+			  } else { // code for IE6, IE5
+			    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			  }
+			  xmlhttp.onreadystatechange=function() {
+			    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			      document.getElementById("cart").innerHTML=xmlhttp.responseText;
+			    }
+			  }
+			  xmlhttp.open("GET","SbUtil.php?q="+str1+"&pr="+str2,true);
+			  xmlhttp.send();
+			} 
 		
-		  if (str1=="" && str2=="") {
-		    document.getElementById("cart").innerHTML="";
-		    return;
-		  }
-		  if (window.XMLHttpRequest) {
-		    // code for IE7+, Firefox, Chrome, Opera, Safari
-		    xmlhttp=new XMLHttpRequest();
-		  } else { // code for IE6, IE5
-		    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-		  }
-		  xmlhttp.onreadystatechange=function() {
-		    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-		      document.getElementById("cart").innerHTML=xmlhttp.responseText;
-		    }
-		  }
-		  xmlhttp.open("GET","SbUtil.php?q="+str1+"&pr="+str2,true);
-		  xmlhttp.send();
-		}
+		});
+
 </script>
 	
 </head>
+
+<style>
+ 
+ul li.cart_items {
+	list-style-type:none;
+	list-style:none;
+	float:left;
+	margin-right:20px;
+}
+
+</style>
+
 <body>
 
 	<div id="border-top-navbar" class="navbar navbar-inverse navbar-fixed-top">

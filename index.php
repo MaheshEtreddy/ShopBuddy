@@ -21,7 +21,7 @@ $util = new SbUtil();
 		<div class="span3">
 			<div class="well">
 
-				<div class="dropdown" id='cart' >
+				<div class="dropdown " id='cart' >
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#"> <i
 						class="icon-shopping-cart"></i> Your Cart <b class="caret"></b></a>
 
@@ -30,9 +30,8 @@ $util = new SbUtil();
 							<p>Cart is empty</p>
 					</div>
 				</div>
-
-			</div>
-
+			</div> 
+			
 			<div class="well">
 				<h4>Brand</h4>
 				<form action="" method='get'>
@@ -95,15 +94,15 @@ $util = new SbUtil();
 			<div id="myCarousel" class="carousel slide">
 			<!-- Carousel slides -->
 			<div class="carousel-inner">
-				<div class="active item">
+				<!-- <div class="active item">
 					<img src="img/1.jpg" width="916px" height="348px">
 					<div class="carousel-caption">
 						<h4>DesignLoud, LLC</h4>
 						<p>This is a sample caption for our Twitter Bootstrap tutorial.</p>
 					</div>
-				</div>
+				</div> -->
 				
-				<div class="item">
+				<div class="active item">
 					<img src="img/slider-1.jpg" width="916px" height="348px">
 					<div class="carousel-caption">
 						<h4>DesignLoud, LLC</h4>
@@ -135,32 +134,87 @@ $util = new SbUtil();
 			<?php 
 			$pr = "select * from `products` where deleted = 0";
 			$prqry = mysql_query($pr);
+			
 			while ($prdata = mysql_fetch_array($prqry)){
-				echo "<li class='span3'>
-					<div class='thumbnail'>
-					<img alt='{$prdata['productName']}' src='admin/uploads/{$prdata['ProductImage']}'>
-					<div class='caption'>
-					<h4>{$prdata['productName']}</h4>
-					<p>
-					<strike>{$prdata['MSRP']}</strike>&nbsp;{$prdata['buyPrice']}
-					</p>
-					<a class='btn btn-primary' href='view-product.php' >View</a> &nbsp;"; 
+				echo "<li class='cart_items'>
+					<div class='content'> <a  href='javascript:;' class='product-image' title='{$prdata['productName']}' > 
+				      <img class='thumbnail' src='admin/uploads/{$prdata['ProductImage']}' alt='{$prdata['productName']}' width='300px' height='200px' /> </a> 
+				      <div class='caption'>
+						<h4>{$prdata['productName']}</h4>
+				      <p>
+						<strike>$ {$prdata['MSRP']}</strike>&nbsp; $ {$prdata['buyPrice']} USD
+						</p>
+						<button class='btn btn-primary' data-toggle='modal' data-target='#myModal'>
+						  View
+						</button>
+						<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+						  <div class='modal-dialog'>
+						    <div class='modal-content'>
+						      <div class='modal-header'>
+						        <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'></span><span class='sr-only'></span></button>
+						        <h4 class='modal-title' id='myModalLabel'>{$prdata['productName']}</h4>
+						      </div>
+						      <div class='modal-body'>
+						        
+					<div class='span5'>
+								<div class='active item'>
+									<img class='media-object' src='admin/uploads/{$prdata['ProductImage']}' alt='{$prdata['productName']}' />
+								</div>
+
+					</div>
+
+					<div class='span4'>
+						<h4>{$prdata['productBrand']} and {$prdata['productLine']}</h4>
+						<h5>{$prdata['productCode']} {$prdata['productName']}</h5>
+						<h6>{$prdata['productVendor']}</h6>
+						<p>{$prdata['productDescription']}</p>
+						<h4>$ {$prdata['buyPrice']} USD</h4>
+						
+
+							 <button type='button' code= {$prdata['productCode']} price={$prdata['buyPrice']} title='Add to Cart' class='add-to-cart btn btn-success'>Add to Cart</button>
+								<a href='#'>+ Add to whishlist</a>
+						
+							</div>
+						     
+							
+							<div class='row' style='margin-top: 30px'>
+					<div class='span9'  style='margin-top: 30px'>
+						<ul class='nav nav-tabs' id='tabs'>
+							<li class='active'><a href='#reviews'><span class='badge badge-inverse'></span> Reviews</a></li>
+						</ul>
+
+						<div class='tab-content'>";
+				$rq = "select * from `reviews` where `productCode` = '{$prdata['productCode']}'";
+				$rv = mysql_query($rq);
+							while ($rev = mysql_fetch_assoc($rv)){
+							echo "<div class='tab-pane active' id='reviews'>
+							{$rev['Review']}
+							</div>";
+							}
+						echo "</div>
+					</div>
+				</div>
 				
-?>
-						<button class='btn btn-success' id='cart' onclick='populateCart(<?=$prdata['productCode']?>,<?=$prdata['buyPrice']?>);'> Add to Cart </button>
-					
-					  <?php   echo "</div></div></li>";
+						      </div>
+						      <div class='modal-footer'>
+						        <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+
+				      <button type='button' code= {$prdata['productCode']} price={$prdata['buyPrice']} title='Add to Cart' class='add-to-cart btn btn-success'>Add to Cart</button></div></div></li>";
 			}
 			
 			?>
 			</ul>
-
+		
 			<div class="pagination">
 				<ul>
-					<liclass"disabled">
+					<li class="disabled">
 					<span>Prev</span>
 					</li>
-					<liclass"disabled"><span>1</span></li>
+					<li class="disabled"><span>1</span></li>
 						<li><a href="#">2</a></li>
 						<li><a href="#">3</a></li>
 						<li><a href="#">4</a></li>

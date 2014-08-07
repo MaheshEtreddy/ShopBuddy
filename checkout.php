@@ -1,9 +1,15 @@
 <?php 
+
 include 'header.php';
 $util = new SbUtil();
 
+$order_dt = date("Y-m-d H:i:s");
+
 if (isset($_SESSION['username'])) {
 	$n1 = 'in';
+	if ($_GET['checkedout'] == 1){
+		$n1 = '';
+	}
 }else {
 $n = 'in';
 }
@@ -16,11 +22,15 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Continue as a Guest User') {
 }
 
 if ( isset($_POST['submit']) && $_POST['submit'] == 'Login' ) {
-	$message = $util->loginAction($_POST['Username'], $_POST['Password']);
+	$message = $util->loginAction($_POST['Username'], $_POST['Password'], $_GET['pcode']);
 	$n1 = 'in';
 }
 
 if ( isset($_POST['shipD']) && $_POST['shipD'] == 'Continue' ){
+	$n1 = '';
+	$n = '';
+	$n2 = 'in';
+	
 	foreach ($_POST as $key => $val){
 		$_SESSION['check_out_arr'][$key] = $val;
 	}
@@ -31,10 +41,6 @@ if ( isset($_POST['shipD']) && $_POST['shipD'] == 'Continue' ){
 		}
 	}
 	
-	
-	$n = '';
-	$n2 = 'in';
-	$n1 = '';
 }
 
 if ( isset($_POST['shipM']) && $_POST['shipM'] == 'Continue'){
@@ -56,9 +62,29 @@ if ( isset($_POST['payM']) && $_POST['payM'] == 'Continue'){
 	$n3 = '';
 }
 
-if (isset($_POST['confirm_order']) && $_POST['confirm_order'] == 'Confirm Order') {
+if (isset($_GET['confirm_order']) && $_GET['confirm_order'] == 'Confirm Order') {
 	
-	$order_q = "";
+	$od_q ="select * from `orderdetails` where `customerID` = '{$_SESSION["user_id"]}' and `checkout` = 0";
+	$od = mysql_query($od_q);
+	
+	$r = mysql_fetch_assoc($od);
+	
+	$sql_od = "INSERT INTO `sbdata`.`orders` (`orderNumber`, `orderDate`, `shippingStatus`, `shipAddr`, `shipMethod`, `payMethod`, `customerID`)
+			VALUES ('{$r['orderNumber']}', '{$order_dt}', 'Order Placed', '{$_SESSION['check_out_arr']['addressLine1']}', '{$_SESSION['check_out_arr']['shipMethod']}', '{$_SESSION['check_out_arr']['payMethod']}', '{$_SESSION['user_id']}')";
+		$order_q = mysql_query($sql_od);
+		
+		if ($order_q !=  false) {
+			$n1 = '';
+			mysql_query("update orderdetails set checkout = 1 where orderNumber = '{$r['orderNumber']}'");
+			$_SESSION['checkedout'] = 1;
+			unset($_SESSION['check_out_arr']);
+			
+			echo '<script>alert("Order Placed!");
+					window.location.href = "https://localhost/shopbuddy/";
+					</script>';
+		}
+	
+	
 }
 
 ?>
@@ -66,12 +92,14 @@ if (isset($_POST['confirm_order']) && $_POST['confirm_order'] == 'Confirm Order'
 <div class="container">
 		<div class="row" style="margin-top: 30px">
 			<div class="span12">
-				<h2>Checkout Process</h2>
+				<h2>Checkout Process</h2> 
 				<div class="accordion" id="accordion2">
 				
 				<!-- Step 1 -->
 					<div class="accordion-group">
-					<?php if (!isset($_SESSION["username"])) { ?>
+					<?php if (!isset($_SESSION["username"])) {
+						
+						?>
 						<div class="accordion-heading">
 							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
 								STEP 1: CHECKOUT OPTIONS
@@ -113,7 +141,7 @@ if (isset($_POST['confirm_order']) && $_POST['confirm_order'] == 'Confirm Order'
 								</div>
 							</div>
 						</div><?php }else{
-								
+							
 							?>
 							<div class="accordion-heading">
 							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo" >
@@ -186,9 +214,9 @@ if (isset($_POST['confirm_order']) && $_POST['confirm_order'] == 'Confirm Order'
 					<div class="controls">
 						<select name="countryName" required="required">
 							<?php 
-						if (isset($udata['countryName']) && $udata['countryName'] != '') {
-							echo "<option value='{$udata['countryName']}'>
-								{$udata['countryName']}
+						if (isset($udata['country']) && $udata['country'] != '') {
+							echo "<option value='{$udata['country']}'>
+								{$udata['country']}
 							</option>";
 						}else {
 						echo '<option value="">Select Country</option>';}
@@ -282,7 +310,7 @@ if (isset($_POST['confirm_order']) && $_POST['confirm_order'] == 'Confirm Order'
 						</div>
 						<div id="collapseSix" class="accordion-body collapse <?=$n4?>">
 							<div class="accordion-inner">
-							<form action="" method="post">
+							<form action="" method="get">
 								<table class="table table-striped table-hover">
 									<thead>
 										<tr>
@@ -314,6 +342,7 @@ if (isset($_POST['confirm_order']) && $_POST['confirm_order'] == 'Confirm Order'
 								</dl>
 								<div class="clearfix"></div>
 									<input class="btn btn-success pull-right" type="submit" value="Confirm Order" name="confirm_order">
+									<input type="hidden" value="1" name="checkedout">
 								</form>
 							</div>
 						</div>

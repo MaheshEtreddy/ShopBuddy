@@ -38,21 +38,35 @@ define ("MAX_SIZE","500");
 if (isset($_POST['submit']))
 {
 
-	$ufile = $_FILES['uploadedfile']['name'];
+	$ufile = $_FILES['uploadedfile']['tmp_name'];
 	$type = $_FILES['uploadedfile']['type'];
+	$name = $_FILES['uploadedfile']['name'];
+	
+	$ext = SbUtil::getExtension($name);
+
+	$ext = strtolower($ext);
+	
+	list($w,$h) = getimagesize($ufile);
+	
 	$target_path="uploads/";
+	
+	$target_path = $target_path.basename( $name );
 
-	$target_path = $target_path.basename( $_FILES['uploadedfile']['name']);
-
-	if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'],$target_path))
-	{
+ 	if (($ext != "jpg") && ($ext != "jpeg") && ($ext != "png") && ($ext != "gif")) 
+ 	{
+ 		echo "<span style='color:red'>Unknown Image extension </span>";
+ 	}elseif ($w != 300 || $h != 200){
+ 		echo "<span style='color:red'>Image resolution should be 300 x 200 . </span>";
+ 	}
+ 	else
+ 	{
+ 		if (move_uploaded_file($ufile,$target_path)){
 		echo "<span style='color:red'>Record inserted!</span>";
-	}
-
-
 	$sql = "INSERT INTO products(`productCode`, `productName`, `productLine`, `productBrand`, `productVendor`, `productDescription`, `quantityInStock`, `buyPrice`, `MSRP`, `ProductImage`)VALUES
-	('{$_POST['pcode']}', '{$_POST['pname']}', '{$_POST['pline']}', '{$_POST['pbrand']}','{$_POST['pvendor']}', '{$_POST['pdesc']}','{$_POST['quantity']}', '{$_POST['bprice']}', '{$_POST['msrp']}', '$ufile')";
+	('{$_POST['pcode']}', '{$_POST['pname']}', '{$_POST['pline']}', '{$_POST['pbrand']}','{$_POST['pvendor']}', '{$_POST['pdesc']}','{$_POST['quantity']}', '{$_POST['bprice']}', '{$_POST['msrp']}', '$name')";
 	$result=mysql_query($sql);
+ 	}
+ 	}
 
 }
 
@@ -141,7 +155,7 @@ $qry = mysql_query($s);
 
 					<div class="controls">
 						<input type="text" name="quantity" placeholder="Quantity"
-							required="required">
+							>
 					</div>
 				</div>
 				
@@ -159,7 +173,7 @@ $qry = mysql_query($s);
 
 					<div class="controls">
 						<input type="text" name="msrp" placeholder="MSRP"
-							required="required">
+							>
 					</div>
 				</div>
 								
@@ -216,8 +230,8 @@ $qry = mysql_query($s);
 	        	<td>{$get_data['productVendor']}</td>
 	        	<td>{$get_data['productDescription']}</td>
 	        	<td>{$get_data['quantityInStock']}</td>
-	        	<td>{$get_data['buyPrice']}</td>
-	        	<td>{$get_data['MSRP']}</td>
+	        	<td>$ {$get_data['buyPrice']} USD</td>
+	        	<td>$ {$get_data['MSRP']} USD</td>
 	        	<td><img width='120px' height='150px' alt='{$get_data['productName']}' src='uploads/{$get_data['ProductImage']}'></td>
 	        	<td><a href='upd_usr.php?ed={$get_data['productCode']}'><img src='img/buttonUpdate.png'></a></td>
 				<td><a href='rmv_usr.php?del={$get_data['productCode']}'><img src='img/erase.png'></a></td>
