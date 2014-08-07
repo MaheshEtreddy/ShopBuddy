@@ -90,7 +90,7 @@ width: 500px !important;
                                
                             </ul>
                         </li>
-                        <li><a href="admin/admin_orderdetails.php"><i class="icon-pencil icon-black"></i>Order Details</a></li>
+                        <li><a href="admin_orderdetails.php"><i class="icon-pencil icon-black"></i>Order Details</a></li>
                          <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                                class="icon-user icon-black"></i>
