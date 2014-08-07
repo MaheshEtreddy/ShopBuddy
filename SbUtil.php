@@ -124,4 +124,47 @@ if(isset($_GET['q']) && $_GET['q'] != ''){
 	SbUtil::addCart($q,$pr);
 }
 
+function getOrders(){
+	$orderqry = mysql_query("select * from `orderdetails` where customerID={$custID} order by `orderNumber` DESC");
+	$count = 1;
+	if ($orderqry != false) {
+		while ($get_data = mysql_fetch_array($orderqry))
+			 
+		{
+			$nameQry = mysql_query("select customerName from `customers` where customerID = '{$get_data['customerID']}'");
+			$nameRes = mysql_fetch_assoc($nameQry);
+	
+			$productQry = mysql_query("select `productName` from `products` where `productCode` = '{$get_data['productCode']}'");
+			$prodRes = mysql_fetch_assoc($productQry);
+	
+			$paymntQry = mysql_query("select `amount`, `paymentStatus` from `payments` where `orderNumber` = '{$get_data['orderNumber']}'");
+			$paymntRes  = mysql_fetch_assoc($paymntQry);
+	
+			$odrDateStatQry =  mysql_query("select `orderDate`, `shippingStatus`, `Ordercomments` from `orders` where `orderNumber` = '{$get_data['orderNumber']}'");
+			$odrDateStatRes  = mysql_fetch_assoc($odrDateStatQry);
+				
+			echo "<tr class='success'>
+			<td><input type='checkbox' class='enq' name='data[]' id='{$get_data['orderNumber']}' value='{$get_data['orderNumber']}'></td>
+			<td>{$get_data['orderNumber']}</td>
+			<td>{$nameRes['customerName']}</td>
+			<td>{$prodRes['productName']}</td>
+			<td>{$paymntRes['amount']}</td>
+			<td>{$paymntRes['paymentStatus']}</td>
+			<td>{$get_data['quantityOrdered']}</td>
+			<td>{$odrDateStatRes['orderDate']}</td>
+			<td>{$odrDateStatRes['Ordercomments']}</td>
+					<td>{$odrDateStatRes['shippingStatus']}</td>
+					</tr>";
+					$count = $count +1;
+		}
+		}else {
+		echo "<tr>
+			<td colspan = '7'>No Orders to Display</td></tr>";
+    }
+	
+				
+	
+}
+
+
 ?>

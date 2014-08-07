@@ -121,7 +121,8 @@ if (isset ( $_POST ['submit'] ) == 'Create User') {
 					<label class="control-label" for="country">Country</label>
 					<div class="controls">
 						<select name="country" required="required">
-							<?php 
+							<?php
+							$util = new SbUtil();
 						$country = $util->getCountry($udata['customerMail']);
 						
 						if (isset($country) && $country != '') {

@@ -83,10 +83,18 @@ jQuery(function($) {
     </thead>
     <tbody>
     
+    
+    
+    
     <?php 
 
-  
-    $orderqry = mysql_query("select * from `orderdetails` order by `orderNumber` DESC");
+    if (isset($_SESSION["user_id"])){
+    	$custID = $_SESSION["user_id"];
+    		
+    }else{
+    	$custID = '15';
+    }
+    $orderqry = mysql_query("select * from `orderdetails` where customerID={$custID} order by `orderNumber` DESC");
     $count = 1;
     if ($orderqry != false) {
     	while ($get_data = mysql_fetch_array($orderqry))
@@ -101,7 +109,7 @@ jQuery(function($) {
 			$paymntQry = mysql_query("select `amount`, `paymentStatus` from `payments` where `orderNumber` = '{$get_data['orderNumber']}'");
 			$paymntRes  = mysql_fetch_assoc($paymntQry);
 			 
-			$odrDateStatQry =  mysql_query("select `orderDate`, `status`, `comments` from `orders` where `orderNumber` = '{$get_data['orderNumber']}'");
+			$odrDateStatQry =  mysql_query("select `orderDate`, `shippingStatus`, `Ordercomments` from `orders` where `orderNumber` = '{$get_data['orderNumber']}'");
 			$odrDateStatRes  = mysql_fetch_assoc($odrDateStatQry);
 			
 			echo "<tr class='success'>
@@ -110,11 +118,11 @@ jQuery(function($) {
 			<td>{$nameRes['customerName']}</td>
 			<td>{$prodRes['productName']}</td>
 			<td>{$paymntRes['amount']}</td>
+			<td>{$paymntRes['paymentStatus']}</td>
 			<td>{$get_data['quantityOrdered']}</td>
 			<td>{$odrDateStatRes['orderDate']}</td>
-			<td>{$odrDateStatRes['comments']}</td>
-			<td>{$odrDateStatRes['status']}</td>
-			<td>{$odrDateStatRes['comments']}</td>
+			<td>{$odrDateStatRes['Ordercomments']}</td>
+			<td>{$odrDateStatRes['shippingStatus']}</td>
 			</tr>";
 			$count = $count +1;
 			}
