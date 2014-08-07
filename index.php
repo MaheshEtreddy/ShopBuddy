@@ -9,7 +9,6 @@ $pqry = mysql_query($p);
 
 $util = new SbUtil();
 
-
 ?>
 
 <!-- body included header in the top. -->
