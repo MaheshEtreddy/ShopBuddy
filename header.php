@@ -121,7 +121,7 @@ ul li.cart_items {
 							<ul class="dropdown-menu">
 								<li><a href="account_settings.php"> Account Settings</a></li>
 								<li><a href="#l"> Profile</a></li>
-								<li><a href="#"> Your Orders</a></li>
+								<li><a href="user_orderdetails.php"> Your Orders</a></li>
 								<li><a href="#"> E-commerce Checkout</a></li>
 							</ul>
 						</li>
