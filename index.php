@@ -47,8 +47,15 @@ $util = new SbUtil();
 							</label>";
 					}
 				}
+				
+				if (isset($_SERVER['QUERY_STRING'])) {
+parse_str($_SERVER['QUERY_STRING'], $query);
+
+
+					echo "<input type='hidden' name='Cat' value='{$query['Cat']}'>";
+				}
 				?>
-				<input type="submit" class="btn btn-info" value='submit'>
+				<input type="submit" class="btn btn-info" value='Apply'>
 				</form>
 			</div>
 
@@ -74,7 +81,7 @@ $util = new SbUtil();
 				</ul>
 			</div>
 
-			<div class="well">
+		<!-- 	<div class="well">
 				<h4>Sort</h4>
 				<form>
 					<label class="radio"> <input type="radio" name="optionsRadios"
@@ -85,7 +92,7 @@ $util = new SbUtil();
 					</label>
 					<button class="btn btn-primary pull-right" type="submit">Sort</button>
 				</form>
-			</div>
+			</div> -->
 
 
 		</div>
