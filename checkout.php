@@ -3,11 +3,13 @@
 include 'header.php';
 $util = new SbUtil();
 
+$n3 = '';
+$n4 = '';
 $order_dt = date("Y-m-d H:i:s");
 
 if (isset($_SESSION['username'])) {
 	$n1 = 'in';
-	if ($_GET['checkedout'] == 1){
+	if (isset($_GET['checkedout']) == 1){
 		$n1 = '';
 	}
 }else {
@@ -69,13 +71,14 @@ if (isset($_GET['confirm_order']) && $_GET['confirm_order'] == 'Confirm Order') 
 	
 	$r = mysql_fetch_assoc($od);
 	
-	$sql_od = "INSERT INTO `sbdata`.`orders` (`orderNumber`, `orderDate`, `shippingStatus`, `shipAddr`, `shipMethod`, `payMethod`, `customerID`)
-			VALUES ('{$r['orderNumber']}', '{$order_dt}', 'Order Placed', '{$_SESSION['check_out_arr']['addressLine1']}', '{$_SESSION['check_out_arr']['shipMethod']}', '{$_SESSION['check_out_arr']['payMethod']}', '{$_SESSION['user_id']}')";
+	$sql_od = "INSERT INTO `sbdata`.`orders` (`orderNumber`, `orderDate`, `shippingStatus`, `shipAddr`, `shipMethod`, `payMethod`, `customerID`, `productCode`)
+			VALUES ('{$r['orderNumber']}', '{$order_dt}', 'Order Placed', '{$_SESSION['check_out_arr']['addressLine1']}', '{$_SESSION['check_out_arr']['shipMethod']}', '{$_SESSION['check_out_arr']['payMethod']}', '{$_SESSION['user_id']}', '{$_GET['pcode']}' )";
 		$order_q = mysql_query($sql_od);
 		
 		if ($order_q !=  false) {
 			$n1 = '';
 			mysql_query("update orderdetails set checkout = 1 where orderNumber = '{$r['orderNumber']}'");
+			mysql_query("INSERT INTO `payments` (`customerID`, `paymentDate`, `paymentStatus`, `amount`, `orderNumber`) VALUES ('{$_SESSION['user_id']}', '{$order_dt}', '{$_SESSION['check_out_arr']['payMethod']}', '{$r['priceEach']}', '{$r['orderNumber']}')");
 			$_SESSION['checkedout'] = 1;
 			unset($_SESSION['check_out_arr']);
 			
@@ -261,11 +264,11 @@ if (isset($_GET['confirm_order']) && $_GET['confirm_order'] == 'Confirm Order') 
 							<div class="accordion-inner">
 								<form method="post" action="">
 									<label class="radio">
-										<input type="radio" name="shipment" id="free" value="freeship" checked>
+										<input type="radio" name="shipment" id="free" value="0" checked>
 										Free Shipping <b>($0.00)</b>
 									</label>
 									<label class="radio">
-										<input type="radio" name="shipment" id="flat" value="flaterate">
+										<input type="radio" name="shipment" id="flat" value="10">
 										Flat Shipping Rate <b>($10.00)</b>
 									</label>
 									<br />
@@ -332,17 +335,22 @@ if (isset($_GET['confirm_order']) && $_GET['confirm_order'] == 'Confirm Order') 
 								
 								<dl class="dl-horizontal pull-right">
 									<dt>Sub-total:</dt>
-									<dd><?=$_SESSION['check_out_arr']['buyPrice']?></dd>
+									<dd>$ <?=$_GET['price']?></dd>
 
 									<dt>Shipping Cost:</dt>
-									<dd>$0.01</dd>
-
+										<dd>$ <?=$_SESSION['check_out_arr']['shipMethod']?></dd>
+									
+									<?php 
+									
+									$sum = $_GET['price']+$_SESSION['check_out_arr']['shipMethod'];
+									?>
 									<dt>Total:</dt>
-									<dd>$1000.00</dd>
+									<dd>$ <?php echo $sum; ?></dd>
 								</dl>
 								<div class="clearfix"></div>
 									<input class="btn btn-success pull-right" type="submit" value="Confirm Order" name="confirm_order">
 									<input type="hidden" value="1" name="checkedout">
+									<input type="hidden" value="<?=$_GET['pcode']?>" name="pcode">
 								</form>
 							</div>
 						</div>

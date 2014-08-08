@@ -80,8 +80,31 @@ SbUtil::dbConnect();
 			  xmlhttp.open("GET","SbUtil.php?q="+str1+"&pr="+str2,true);
 			  xmlhttp.send();
 			} 
-		
+
+		$('#view').click(function() {
+
+
+			});
+
+
 		});
+
+		function populateModal(data) {
+			alert(data);
+			  if (window.XMLHttpRequest) {
+			    // code for IE7+, Firefox, Chrome, Opera, Safari
+			    xmlhttp=new XMLHttpRequest();
+			  } else { // code for IE6, IE5
+			    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			  }
+			  xmlhttp.onreadystatechange=function() {
+			    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			      document.getElementById("myModal").innerHTML=xmlhttp.responseText;
+			    }
+			  }
+			  xmlhttp.open("GET","SbUtil.php?s="+data,true);
+			  xmlhttp.send();
+			} 
 
 </script>
 	

@@ -20,7 +20,9 @@ class SbUtil{
 	
 	function addCart($q,$pr) {
 	
+		session_start();
 		SbUtil::dbConnect();
+		
 		
 		if (isset($_SESSION["user_id"])){
 			$custID = $_SESSION["user_id"];
@@ -130,7 +132,6 @@ class SbUtil{
 	
 }
 
-session_start();
  if(isset($_GET['q']) && $_GET['q'] != ''){
 	SbUtil::addCart($_GET['q'],$_GET['pr']);
 } 
