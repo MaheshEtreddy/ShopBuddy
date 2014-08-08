@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server version:               5.0.51 - Source distribution
+-- Server version:               5.6.16 - MySQL Community Server (GPL)
 -- Server OS:                    Win32
--- HeidiSQL Version:             8.3.0.4771
+-- HeidiSQL Version:             8.0.0.4396
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -19,10 +19,10 @@ USE `sbdata`;
 -- Dumping structure for table sbdata.countries
 DROP TABLE IF EXISTS `countries`;
 CREATE TABLE IF NOT EXISTS `countries` (
-  `idCountry` int(5) NOT NULL auto_increment,
-  `countryCode` char(2) NOT NULL default '',
-  `countryName` varchar(45) NOT NULL default '',
-  PRIMARY KEY  (`idCountry`)
+  `idCountry` int(5) NOT NULL AUTO_INCREMENT,
+  `countryCode` char(2) NOT NULL DEFAULT '',
+  `countryName` varchar(45) NOT NULL DEFAULT '',
+  PRIMARY KEY (`idCountry`)
 ) ENGINE=MyISAM AUTO_INCREMENT=253 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table sbdata.countries: 230 rows
@@ -265,21 +265,21 @@ INSERT INTO `countries` (`idCountry`, `countryCode`, `countryName`) VALUES
 -- Dumping structure for table sbdata.customers
 DROP TABLE IF EXISTS `customers`;
 CREATE TABLE IF NOT EXISTS `customers` (
-  `customerID` int(11) NOT NULL auto_increment,
+  `customerID` int(11) NOT NULL AUTO_INCREMENT,
   `customerMail` varchar(50) NOT NULL,
   `customerName` varchar(50) NOT NULL,
   `phone` varchar(50) NOT NULL,
   `addressLine1` varchar(50) NOT NULL,
-  `addressLine2` varchar(50) default NULL,
+  `addressLine2` varchar(50) DEFAULT NULL,
   `city` varchar(50) NOT NULL,
   `state` varchar(50) NOT NULL,
   `postalCode` varchar(15) NOT NULL,
   `country` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `creditLimit` double default NULL,
-  `deletedYN` int(10) NOT NULL default '0',
-  `createdDate` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-  PRIMARY KEY  (`customerID`)
+  `creditLimit` double DEFAULT NULL,
+  `deletedYN` int(10) NOT NULL DEFAULT '0',
+  `createdDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`customerID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=128 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table sbdata.customers: 126 rows
@@ -424,7 +424,7 @@ CREATE TABLE IF NOT EXISTS `employees` (
   `password` varchar(10) NOT NULL,
   `email` varchar(100) NOT NULL,
   `jobTitle` varchar(50) NOT NULL,
-  PRIMARY KEY  (`employeeNumber`)
+  PRIMARY KEY (`employeeNumber`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- Dumping data for table sbdata.employees: 23 rows
@@ -460,49 +460,54 @@ INSERT INTO `employees` (`employeeNumber`, `lastName`, `firstName`, `password`, 
 -- Dumping structure for table sbdata.orderdetails
 DROP TABLE IF EXISTS `orderdetails`;
 CREATE TABLE IF NOT EXISTS `orderdetails` (
-  `cartID` int(11) NOT NULL auto_increment,
-  `orderNumber` varchar(50) NOT NULL,
+  `cartID` int(11) NOT NULL AUTO_INCREMENT,
+  `orderNumber` varchar(150) NOT NULL,
   `productCode` varchar(15) NOT NULL,
-  `checkout` bit(1) NOT NULL default '\0',
-  `quantityOrdered` int(11) default NULL,
+  `checkout` bit(1) NOT NULL DEFAULT b'0',
+  `quantityOrdered` int(11) DEFAULT NULL,
   `priceEach` double NOT NULL,
   `customerID` int(11) NOT NULL,
-  PRIMARY KEY  (`cartID`,`orderNumber`),
+  PRIMARY KEY (`cartID`,`orderNumber`),
   KEY `productCode` (`productCode`),
   KEY `FK_orderdetails_customers` (`customerID`)
-) ENGINE=MyISAM AUTO_INCREMENT=177 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=199 DEFAULT CHARSET=latin1;
 
--- Dumping data for table sbdata.orderdetails: 23 rows
+-- Dumping data for table sbdata.orderdetails: 1 rows
 DELETE FROM `orderdetails`;
 /*!40000 ALTER TABLE `orderdetails` DISABLE KEYS */;
 INSERT INTO `orderdetails` (`cartID`, `orderNumber`, `productCode`, `checkout`, `quantityOrdered`, `priceEach`, `customerID`) VALUES
-	(176, '1HUAC0120140807100350', 'HUAC01', b'1', NULL, 16645, 1);
+	(198, '1BMWX50120140807233900', 'BMWX501', b'10000000', NULL, 56025, 1),
+	(197, '1HUAC0120140807233836', 'HUAC01', b'10000000', NULL, 16645, 1),
+	(196, '1HUAC0120140807233439', 'HUAC01', b'10000000', NULL, 16645, 1);
 /*!40000 ALTER TABLE `orderdetails` ENABLE KEYS */;
 
 
 -- Dumping structure for table sbdata.orders
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
-  `orderNumber` varchar(50) NOT NULL,
+  `orderNumber` varchar(150) NOT NULL,
   `orderDate` datetime NOT NULL,
-  `requiredDate` datetime default NULL,
-  `shippedDate` datetime default NULL,
-  `shippingStatus` varchar(15) default NULL,
-  `shipAddr` varchar(50) default NULL,
-  `shipMethod` varchar(50) default NULL,
-  `payMethod` varchar(50) default NULL,
-  `Ordercomments` text,
+  `requiredDate` datetime DEFAULT NULL,
+  `shippedDate` datetime DEFAULT NULL,
+  `shippingStatus` varchar(15) DEFAULT NULL,
+  `shipAddr` varchar(50) DEFAULT NULL,
+  `shipMethod` varchar(50) DEFAULT NULL,
+  `payMethod` varchar(50) DEFAULT NULL,
+  `OrderStatus` text,
   `customerID` int(11) NOT NULL,
-  PRIMARY KEY  (`orderNumber`),
+  `productCode` varchar(50) NOT NULL,
+  PRIMARY KEY (`orderNumber`),
   KEY `customerNumber` (`customerID`),
   KEY `orderNumber` (`orderNumber`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Dumping data for table sbdata.orders: 2 rows
+-- Dumping data for table sbdata.orders: 1 rows
 DELETE FROM `orders`;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` (`orderNumber`, `orderDate`, `requiredDate`, `shippedDate`, `shippingStatus`, `shipAddr`, `shipMethod`, `payMethod`, `Ordercomments`, `customerID`) VALUES
-	('1HUAC0120140807100350', '2014-08-07 10:03:58', NULL, NULL, 'Order Placed', '1 rue Alsace-Lorraine', 'freeship', 'Paypal', NULL, 1);
+INSERT INTO `orders` (`orderNumber`, `orderDate`, `requiredDate`, `shippedDate`, `shippingStatus`, `shipAddr`, `shipMethod`, `payMethod`, `OrderStatus`, `customerID`, `productCode`) VALUES
+	('1HUAC0120140807233836', '2014-08-07 23:38:41', NULL, NULL, 'Order Placed', '1 rue Alsace-Lorraine', '0', 'Paypal', NULL, 1, 'HUAC01'),
+	('1HUAC0120140807233439', '2014-08-07 23:35:05', NULL, NULL, 'Order Placed', '1 rue Alsace-Lorraine', '0', 'Paypal', NULL, 1, 'HUAC01'),
+	('1BMWX50120140807233900', '2014-08-07 23:39:16', NULL, NULL, 'Order Placed', 'River side', '0', 'Paypal', NULL, 1, 'BMWX501');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 
 
@@ -510,18 +515,22 @@ INSERT INTO `orders` (`orderNumber`, `orderDate`, `requiredDate`, `shippedDate`,
 DROP TABLE IF EXISTS `payments`;
 CREATE TABLE IF NOT EXISTS `payments` (
   `customerID` int(11) NOT NULL,
-  `checkNumber` varchar(50) NOT NULL,
   `paymentDate` date NOT NULL,
   `paymentStatus` varchar(50) NOT NULL,
   `amount` double NOT NULL,
-  `orderNumber` int(10) default NULL,
-  PRIMARY KEY  (`customerID`,`checkNumber`),
-  KEY `FK_payments_orderdetails` (`orderNumber`)
+  `orderNumber` varchar(150) NOT NULL,
+  PRIMARY KEY (`orderNumber`),
+  KEY `FK_payments_orderdetails` (`orderNumber`),
+  KEY `customerID` (`customerID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Dumping data for table sbdata.payments: 0 rows
+-- Dumping data for table sbdata.payments: 2 rows
 DELETE FROM `payments`;
 /*!40000 ALTER TABLE `payments` DISABLE KEYS */;
+INSERT INTO `payments` (`customerID`, `paymentDate`, `paymentStatus`, `amount`, `orderNumber`) VALUES
+	(1, '2014-08-07', 'Paypal', 16645, '1HUAC0120140807233439'),
+	(1, '2014-08-07', 'Paypal', 16645, '1HUAC0120140807233836'),
+	(1, '2014-08-07', 'Paypal', 56025, '1BMWX50120140807233900');
 /*!40000 ALTER TABLE `payments` ENABLE KEYS */;
 
 
@@ -531,27 +540,27 @@ CREATE TABLE IF NOT EXISTS `productlines` (
   `productLine` varchar(50) NOT NULL,
   `textDescription` longtext,
   `image` mediumblob,
-  `deleted` bit(1) NOT NULL default '\0',
-  PRIMARY KEY  (`productLine`)
+  `deleted` bit(1) NOT NULL DEFAULT b'0',
+  PRIMARY KEY (`productLine`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- Dumping data for table sbdata.productlines: 13 rows
 DELETE FROM `productlines`;
 /*!40000 ALTER TABLE `productlines` DISABLE KEYS */;
 INSERT INTO `productlines` (`productLine`, `textDescription`, `image`, `deleted`) VALUES
-	('Hachback', 'A hatchback is a car body configuration with a rear door that swings upward to provide access to a cargo area. Hatchbacks may feature fold-down second row seating, where the interior can be flexibly reconfigured to prioritize passenger vs. cargo volume. Hatchbacks may feature two- or three-box design.				  ', _binary 0x6879756E6461692D6932302D333030783230302E6A7067, b'0'),
-	('Sedan', 'A sedan /sÉ¨ËˆdÃ¦n/ (American, Canadian, Australian and New Zealand English) or saloon (British and Irish English) is a passenger car in a three-box configuration with A, B & C-pillars and principal volumes articulated in separate compartments for engine, passenger and cargo.[1] The passenger compartment features two rows of seats and adequate passenger space in the rear compartment for adult passengers. The cargo compartment is typically in the rear, with the exception of some rear-engined models, such as the Renault Dauphine, Tatra T613, Volkswagen Type 3 and Chevrolet Corvair. It is one of the most common car body styles					  ', _binary 0x323031335F6B69615F666F7274655F736564616E5F73785F66715F6F656D5F325F3330302E6A7067, b'0'),
-	('Vintage', 'A vintage car is, in the most general sense, an old automobile, and in the narrower senses of car enthusiasts and collectors, it is a car from the period of 1919 to 1930. Such enthusiasts have categorization schemes for ages of cars that enforce distinctions between antique cars, vintage cars, classic cars, and so on. The classification criteria vary, but consensus within any country is often maintained by major car clubs.		  ', _binary 0x51617461722D436C61737369632D436172732D333030783230302E6A7067, b'0'),
-	('Station Wagon', 'A station wagon (also known as an estate or estate car) is an automobile with a body style variant of a sedan/saloon with its roof extended rearward over a shared passenger/cargo volume with access at the back via a third or fifth door (the liftgate or tailgate), instead of a trunk lid. The body style transforms a standard three-box design into a two-box designâ€”to include an A, B, and C-pillar, as well as a D-pillar. Station wagons can flexibly reconfigure their interior volume via fold-down rear seats to prioritize either passenger or cargo volume.					  ', _binary 0x33323070782D417564695F41365F4176616E745F322E305F5444495F44616B6F7461677261755F53656974652E4A5047, b'0'),
-	('Sports cars', 'The term "sports car" does not appear to have a clear definition.[17] It is commonly used to describe vehicles which prioritise acceleration and handling; however, some people claim it is also defined as a vehicle with two seats.[18]\r\nA sports car (sportscar or sport car) is a small, usually two-seat, two-door automobile designed for spirited performance and nimble handling.[19] Sports cars may be spartan or luxurious but high maneuverability and minimum weight are requisite.					  ', _binary 0x6E697373616E5F67742D725F6E69736D6F5F73706F7274735F6361722D333030783230302E6A7067, b'0'),
-	('Grand tourer', 'Larger, more powerful and heavier than sports cars, these vehicles typically have a FR layout and seating for four passengers (2+2). These are more expensive than sports cars but not as expensive as supercars. Some grand tourers are hand-built.					  ', _binary 0x31313034375F6D2E6A7067, b'0'),
-	('Supercar', 'Supercar is a term generally used for ultra-high-end exotic cars, whose performance is superior to that of its contemporaries. The proper application of the term is subjective and disputed, especially among enthusiasts.					  ', _binary 0x33303070782D477261795F4C616D626F726768696E695F4C503634302E6A7067, b'0'),
-	('Muscle car', 'The muscle car term generally refers to rear wheel drive mid-size cars with powerful V8 engines, manufactured in the USA.[21][22] Some people define it as a 2-door vehicle;[23] however, others include 4-door vehicles in the definition.[24] Although opinions vary, it is generally accepted that classic muscle cars were produced in the late 1960s and early 1970s.[25][26][27][28] Muscle cars were also produced in Australia and other nations.					  ', _binary 0x556C74696D6174652D426573742D6F662D53686F772D383830372D333030783230302E6A7067, b'0'),
-	('Pony car', 'The pony car is a class of American[29] automobile launched and inspired by the Ford Mustang in 1964. It describes an affordable, compact, highly styled car with a sporty or performance-oriented image.					  ', _binary 0x43686576726F6C65742D43616D61726F322D323031342E6A7067, b'0'),
-	('Roadster', 'A roadster is an open (without a fixed roof or side weather protection) two-seat car with emphasis on sporty handling. While roadsters often have soft-tops, retractable hard-tops are becoming more common.					  ', _binary 0x686F6E64612D73323030302D333030783230302E6A7067, b'0'),
-	('SUV', 'Sport utility vehicles are off-road vehicles with four-wheel drive and true off-road capability. They most often feature high ground clearance and an upright, boxy body design. Sport Utilities are typically defined by a body on frame construction which offers more off-road capability but reduced on-road ride comfort and handling compared to a cross-over or car based utility vehicle.					  ', _binary 0x323031322D646973636F766572792D342D696E6475732D73696C7665722D333030783230302E6A7067, b'0'),
-	('Crossover SUV', 'Crossover SUVs are derived from an automobile platform using a monocoque construction with light off-road capability and lower ground clearance than SUVs. They may be styled similar to conventional "off-roaders", or may be look similar to an estate car or station wagon.					  ', _binary 0x31303431365F6D2E6A7067, b'0'),
-	('MPV', 'Multi Purpose Vehicles are also known as "people carriers", this class of cars resembles tall estate cars. Larger MPVs may have seating for up to eight passengers. (Beyond that size, similar vehicles tend to be derived from vans (see below) and in Europe are called minibuses.)\r\n\r\nBeing taller than a family car improves visibility for the driver (while reducing visibility for other road users) and may help access for the elderly or disabled. They also offer more seats and increased load capacity than hatchbacks or estate cars.					  ', _binary 0x682D6E6F74652D333030783230302E6A7067, b'0');
+	('Hachback', 'A hatchback is a car body configuration with a rear door that swings upward to provide access to a cargo area. Hatchbacks may feature fold-down second row seating, where the interior can be flexibly reconfigured to prioritize passenger vs. cargo volume. Hatchbacks may feature two- or three-box design.				  ', _binary 0x6879756E6461692D6932302D333030783230302E6A7067, b'00000000'),
+	('Sedan', 'A sedan /sÉ¨ËˆdÃ¦n/ (American, Canadian, Australian and New Zealand English) or saloon (British and Irish English) is a passenger car in a three-box configuration with A, B & C-pillars and principal volumes articulated in separate compartments for engine, passenger and cargo.[1] The passenger compartment features two rows of seats and adequate passenger space in the rear compartment for adult passengers. The cargo compartment is typically in the rear, with the exception of some rear-engined models, such as the Renault Dauphine, Tatra T613, Volkswagen Type 3 and Chevrolet Corvair. It is one of the most common car body styles					  ', _binary 0x323031335F6B69615F666F7274655F736564616E5F73785F66715F6F656D5F325F3330302E6A7067, b'00000000'),
+	('Vintage', 'A vintage car is, in the most general sense, an old automobile, and in the narrower senses of car enthusiasts and collectors, it is a car from the period of 1919 to 1930. Such enthusiasts have categorization schemes for ages of cars that enforce distinctions between antique cars, vintage cars, classic cars, and so on. The classification criteria vary, but consensus within any country is often maintained by major car clubs.		  ', _binary 0x51617461722D436C61737369632D436172732D333030783230302E6A7067, b'00000000'),
+	('Station Wagon', 'A station wagon (also known as an estate or estate car) is an automobile with a body style variant of a sedan/saloon with its roof extended rearward over a shared passenger/cargo volume with access at the back via a third or fifth door (the liftgate or tailgate), instead of a trunk lid. The body style transforms a standard three-box design into a two-box designâ€”to include an A, B, and C-pillar, as well as a D-pillar. Station wagons can flexibly reconfigure their interior volume via fold-down rear seats to prioritize either passenger or cargo volume.					  ', _binary 0x33323070782D417564695F41365F4176616E745F322E305F5444495F44616B6F7461677261755F53656974652E4A5047, b'00000000'),
+	('Sports cars', 'The term "sports car" does not appear to have a clear definition.[17] It is commonly used to describe vehicles which prioritise acceleration and handling; however, some people claim it is also defined as a vehicle with two seats.[18]\r\nA sports car (sportscar or sport car) is a small, usually two-seat, two-door automobile designed for spirited performance and nimble handling.[19] Sports cars may be spartan or luxurious but high maneuverability and minimum weight are requisite.					  ', _binary 0x6E697373616E5F67742D725F6E69736D6F5F73706F7274735F6361722D333030783230302E6A7067, b'00000000'),
+	('Grand tourer', 'Larger, more powerful and heavier than sports cars, these vehicles typically have a FR layout and seating for four passengers (2+2). These are more expensive than sports cars but not as expensive as supercars. Some grand tourers are hand-built.					  ', _binary 0x31313034375F6D2E6A7067, b'00000000'),
+	('Supercar', 'Supercar is a term generally used for ultra-high-end exotic cars, whose performance is superior to that of its contemporaries. The proper application of the term is subjective and disputed, especially among enthusiasts.					  ', _binary 0x33303070782D477261795F4C616D626F726768696E695F4C503634302E6A7067, b'00000000'),
+	('Muscle car', 'The muscle car term generally refers to rear wheel drive mid-size cars with powerful V8 engines, manufactured in the USA.[21][22] Some people define it as a 2-door vehicle;[23] however, others include 4-door vehicles in the definition.[24] Although opinions vary, it is generally accepted that classic muscle cars were produced in the late 1960s and early 1970s.[25][26][27][28] Muscle cars were also produced in Australia and other nations.					  ', _binary 0x556C74696D6174652D426573742D6F662D53686F772D383830372D333030783230302E6A7067, b'00000000'),
+	('Pony car', 'The pony car is a class of American[29] automobile launched and inspired by the Ford Mustang in 1964. It describes an affordable, compact, highly styled car with a sporty or performance-oriented image.					  ', _binary 0x43686576726F6C65742D43616D61726F322D323031342E6A7067, b'00000000'),
+	('Roadster', 'A roadster is an open (without a fixed roof or side weather protection) two-seat car with emphasis on sporty handling. While roadsters often have soft-tops, retractable hard-tops are becoming more common.					  ', _binary 0x686F6E64612D73323030302D333030783230302E6A7067, b'00000000'),
+	('SUV', 'Sport utility vehicles are off-road vehicles with four-wheel drive and true off-road capability. They most often feature high ground clearance and an upright, boxy body design. Sport Utilities are typically defined by a body on frame construction which offers more off-road capability but reduced on-road ride comfort and handling compared to a cross-over or car based utility vehicle.					  ', _binary 0x323031322D646973636F766572792D342D696E6475732D73696C7665722D333030783230302E6A7067, b'00000000'),
+	('Crossover SUV', 'Crossover SUVs are derived from an automobile platform using a monocoque construction with light off-road capability and lower ground clearance than SUVs. They may be styled similar to conventional "off-roaders", or may be look similar to an estate car or station wagon.					  ', _binary 0x31303431365F6D2E6A7067, b'00000000'),
+	('MPV', 'Multi Purpose Vehicles are also known as "people carriers", this class of cars resembles tall estate cars. Larger MPVs may have seating for up to eight passengers. (Beyond that size, similar vehicles tend to be derived from vans (see below) and in Europe are called minibuses.)\r\n\r\nBeing taller than a family car improves visibility for the driver (while reducing visibility for other road users) and may help access for the elderly or disabled. They also offer more seats and increased load capacity than hatchbacks or estate cars.					  ', _binary 0x682D6E6F74652D333030783230302E6A7067, b'00000000');
 /*!40000 ALTER TABLE `productlines` ENABLE KEYS */;
 
 
@@ -568,8 +577,8 @@ CREATE TABLE IF NOT EXISTS `products` (
   `buyPrice` double NOT NULL,
   `MSRP` double NOT NULL,
   `ProductImage` longblob,
-  `deleted` bit(1) NOT NULL default '\0',
-  PRIMARY KEY  (`productCode`),
+  `deleted` bit(1) NOT NULL DEFAULT b'0',
+  PRIMARY KEY (`productCode`),
   KEY `productLine` (`productLine`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -577,22 +586,22 @@ CREATE TABLE IF NOT EXISTS `products` (
 DELETE FROM `products`;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
 INSERT INTO `products` (`productCode`, `productName`, `productLine`, `productBrand`, `productVendor`, `productDescription`, `quantityInStock`, `buyPrice`, `MSRP`, `ProductImage`, `deleted`) VALUES
-	('HUAC01', 'Hundai Accent', 'Hachback', 'Hundai', 'Vamsy', 'Hyundai has pruned its Accent small car range with the previous flagship Premium model being dropped due to its closeness in price to the slightly larger i30 model. Only four variants are now offered, entry-level Active as either hatch or sedan, mid-spec Elite sedan, and the semi-sporty SR hatch.					  ', 210, 16645, 14645, _binary 0x323031332D4879756E6461692D416363656E742E6A7067, b'0'),
-	('TACS01', 'Tata Aria', 'Crossover SUV', 'Tata', 'Tata Motor Corp.', 'The Tata Aria is a crossover SUV produced by Tata Motors of India. Tata Aria was launched on 5 January 2010 at Auto Expo, Delhi, and was launched to customers on 12 October 2010 and priced at 1 to 1.5 Million Indian Rupees or ($20 to $30K ).[1] The Price of Tata Aria starts from Rs. 9.95 Lakhs.[2] It is based upon the Tata Xover concept showcased in 2006 Geneva Motor Show. Tata Aria was also a series of concept cars introduced by Tata Motors at Geneva Auto Show 2000. 					  ', 12, 24438.157, 26438.157, _binary 0x3836383830303737345F4C535F617269612E676966, b'0'),
-	('CHEQ01', 'Chevrolet Equinox', 'Crossover SUV', 'Chevrolet', 'Chevrolet', 'The Chevrolet Equinox is a mid-size crossover SUV from Chevrolet based on GM\'s Theta unibody platform, manufactured at CAMI Automotive (formerly a GM/Suzuki joint venture, now wholly owned by GM) plant in Ingersoll, Ontario, Canada, and introduced in 2004 for the 2005 model year.					  ', 11, 21000, 23000, _binary 0x30392D63686576726F6C65742D657175696E6F7873706F72742D30316633342E6A7067, b'0'),
-	('BMWX501', 'BMW X5', 'SUV', 'BMW', 'BMW', 'The BMW X5 is a midsize luxury SUV (Sport Utility Vehicle) (J-segment in Europe) produced by BMW. The first generation of the X5, with the chassis code E53, made its debut in 1999. It was BMW\'s first SUV (Sport Utility Vehicle), also known as "Four-by-Four" (4x4) in the UK, which featured 4WD all-wheel drive and was available with either manual or automatic transmission. In 2006 the second generation X5 was launched, known internally as the E70, featuring the torque-split capable xDrive all-wheel drive system mated to an automatic transmission, and in 2009 the X5 M performance variant was released as a 2010 model.\r\n\r\nBMW branded the X5 as a Sport Activity Vehicle (SAV) rather than an SUV, to emphasize its on-road ability despite its size. Like the Lexus RX 300, the X5 heralded the shift from light truck-based body-on-frame SUVs to crossovers underpinned by unibody car platforms that would come to fruition in the late 2000s. Among German luxury automakers, while the Mercedes-Benz M-Class had beaten the X5 to the market by a year, the X5 was the first to use a unibody chassis whereas the M-Class used a light truck platform until its second generation. While the Lexus RX is based on the Toyota Camry mass market sedan, the X5 shares its underpinnings with the BMW 5 Series performance luxury sedan.[1][2]\r\n\r\nX5s are manufactured in Greer, South Carolina at the Spartanburg BMW plant and modified for armoured, security versions in Mexico at the BMW de MÃ©xico Toluca plant.[3] Since July 2009, some assembly operations are also performed in Kaliningrad, Russia by Avtotor.\r\n\r\nStarting with the X5, BMW\'s Sport Activity Vehicle (SAV) series has since expanded to be derivatives of other BMW number-series models, first in 2003 with the BMW X3 compact luxury crossover, and then in 2008 with the BMW X6 midsize coupe luxury crossover which shares its platform with the X5.					  ', 13, 56025, 58000, _binary 0x31313435355F6D2E6A7067, b'0'),
-	('JGXJ01', 'Jaguar XJ', 'Sedan', 'Jaguar', 'Jaguar', 'The Jaguar XJ is the name of a series of flagship, full-size, luxury cars sold by the British automobile company, Jaguar. The XJ line has had a long history, with the first model released in 1968. The original model was the last Jaguar saloon to have had the input of Sir William Lyons, the company\'s founder, and the model has been featured in countless media and high profile appearances. The current Jaguar XJ was launched in 2009. It is one of the official cars of the royal families and UK Prime Minister.					  ', 5, 376000, 386000, _binary 0x4B35573131412E6A7067, b'0'),
-	('CDXT01', 'Cadillac XTS', 'Sedan', 'Cadillac', 'General Motors', 'The Cadillac XTS is a full-size luxury sedan from the Cadillac brand of General Motors.[1] It is based on an enlarged version of the Epsilon II platform. The XTS replaces both the Cadillac STS and DTS,[2] and is smaller than the DTS but larger than the STS. It began production in May 2012 at the Oshawa Assembly Plant and launched in June. The XTS is available with both front-wheel drive and all-wheel drive.\r\n\r\nFor the Chinese market, the Cadillac XTS is being assembled by Shanghai GM. Production began in February 2013. In addition to the LFX 3.6 V6, Cadillac XTS also comes with an LTG 2.0 turbo engine in the Chinese market. In the Chinese market, the Cadillac XTS with an LFX 3.6 V6 engine is called XTS 36S, and the version with LTG 2.0 turbo engine is called XTS 2.0T. This vehicle may be partially marketed in Europe, though the only LWB car based on the Epsilon II platform sold in Europe was Saab 9-5 which ceased production in 2012.					  ', 0, 52800, 55000, _binary 0x323630345F63726F705F333030783230305F323031335F636164696C6C61635F7874732D322E6A7067, b'0');
+	('HUAC01', 'Hundai Accent', 'Hachback', 'Hundai', 'Vamsy', 'Hyundai has pruned its Accent small car range with the previous flagship Premium model being dropped due to its closeness in price to the slightly larger i30 model. Only four variants are now offered, entry-level Active as either hatch or sedan, mid-spec Elite sedan, and the semi-sporty SR hatch.					  ', 210, 16645, 14645, _binary 0x323031332D4879756E6461692D416363656E742E6A7067, b'00000000'),
+	('TACS01', 'Tata Aria', 'Crossover SUV', 'Tata', 'Tata Motor Corp.', 'The Tata Aria is a crossover SUV produced by Tata Motors of India. Tata Aria was launched on 5 January 2010 at Auto Expo, Delhi, and was launched to customers on 12 October 2010 and priced at 1 to 1.5 Million Indian Rupees or ($20 to $30K ).[1] The Price of Tata Aria starts from Rs. 9.95 Lakhs.[2] It is based upon the Tata Xover concept showcased in 2006 Geneva Motor Show. Tata Aria was also a series of concept cars introduced by Tata Motors at Geneva Auto Show 2000. 					  ', 12, 24438.157, 26438.157, _binary 0x3836383830303737345F4C535F617269612E676966, b'00000000'),
+	('CHEQ01', 'Chevrolet Equinox', 'Crossover SUV', 'Chevrolet', 'Chevrolet', 'The Chevrolet Equinox is a mid-size crossover SUV from Chevrolet based on GM\'s Theta unibody platform, manufactured at CAMI Automotive (formerly a GM/Suzuki joint venture, now wholly owned by GM) plant in Ingersoll, Ontario, Canada, and introduced in 2004 for the 2005 model year.', 11, 21000, 23000, _binary 0x30392D63686576726F6C65742D657175696E6F7873706F72742D30316633342E6A7067, b'00000000'),
+	('BMWX501', 'BMW X5', 'SUV', 'BMW', 'BMW', 'The BMW X5 is a midsize luxury SUV (Sport Utility Vehicle) (J-segment in Europe) produced by BMW. The first generation of the X5, with the chassis code E53, made its debut in 1999. It was BMW\'s first SUV (Sport Utility Vehicle), also known as "Four-by-Four" (4x4) in the UK, which featured 4WD all-wheel drive and was available with either manual or automatic transmission. In 2006 the second generation X5 was launched, known internally as the E70, featuring the torque-split capable xDrive all-wheel drive system mated to an automatic transmission, and in 2009 the X5 M performance variant was released as a 2010 model.\r\n\r\nBMW branded the X5 as a Sport Activity Vehicle (SAV) rather than an SUV, to emphasize its on-road ability despite its size. Like the Lexus RX 300, the X5 heralded the shift from light truck-based body-on-frame SUVs to crossovers underpinned by unibody car platforms that would come to fruition in the late 2000s. Among German luxury automakers, while the Mercedes-Benz M-Class had beaten the X5 to the market by a year, the X5 was the first to use a unibody chassis whereas the M-Class used a light truck platform until its second generation. While the Lexus RX is based on the Toyota Camry mass market sedan, the X5 shares its underpinnings with the BMW 5 Series performance luxury sedan.[1][2]\r\n\r\nX5s are manufactured in Greer, South Carolina at the Spartanburg BMW plant and modified for armoured, security versions in Mexico at the BMW de MÃ©xico Toluca plant.[3] Since July 2009, some assembly operations are also performed in Kaliningrad, Russia by Avtotor.\r\n\r\nStarting with the X5, BMW\'s Sport Activity Vehicle (SAV) series has since expanded to be derivatives of other BMW number-series models, first in 2003 with the BMW X3 compact luxury crossover, and then in 2008 with the BMW X6 midsize coupe luxury crossover which shares its platform with the X5.					  ', 13, 56025, 58000, _binary 0x31313435355F6D2E6A7067, b'00000000'),
+	('JGXJ01', 'Jaguar XJ', 'Sedan', 'Jaguar', 'Jaguar', 'The Jaguar XJ is the name of a series of flagship, full-size, luxury cars sold by the British automobile company, Jaguar. The XJ line has had a long history, with the first model released in 1968. The original model was the last Jaguar saloon to have had the input of Sir William Lyons, the company\'s founder, and the model has been featured in countless media and high profile appearances. The current Jaguar XJ was launched in 2009. It is one of the official cars of the royal families and UK Prime Minister.					  ', 5, 376000, 386000, _binary 0x4B35573131412E6A7067, b'00000000'),
+	('CDXT01', 'Cadillac XTS', 'Sedan', 'Cadillac', 'General Motors', 'The Cadillac XTS is a full-size luxury sedan from the Cadillac brand of General Motors.[1] It is based on an enlarged version of the Epsilon II platform. The XTS replaces both the Cadillac STS and DTS,[2] and is smaller than the DTS but larger than the STS. It began production in May 2012 at the Oshawa Assembly Plant and launched in June. The XTS is available with both front-wheel drive and all-wheel drive.\r\n\r\nFor the Chinese market, the Cadillac XTS is being assembled by Shanghai GM. Production began in February 2013. In addition to the LFX 3.6 V6, Cadillac XTS also comes with an LTG 2.0 turbo engine in the Chinese market. In the Chinese market, the Cadillac XTS with an LFX 3.6 V6 engine is called XTS 36S, and the version with LTG 2.0 turbo engine is called XTS 2.0T. This vehicle may be partially marketed in Europe, though the only LWB car based on the Epsilon II platform sold in Europe was Saab 9-5 which ceased production in 2012.					  ', 0, 52800, 55000, _binary 0x323630345F63726F705F333030783230305F323031335F636164696C6C61635F7874732D322E6A7067, b'00000000');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 
 
 -- Dumping structure for table sbdata.reviews
 DROP TABLE IF EXISTS `reviews`;
 CREATE TABLE IF NOT EXISTS `reviews` (
-  `revID` int(11) NOT NULL auto_increment,
+  `revID` int(11) NOT NULL AUTO_INCREMENT,
   `Review` longtext NOT NULL,
   `productCode` varchar(50) NOT NULL,
-  PRIMARY KEY  (`revID`),
+  PRIMARY KEY (`revID`),
   KEY `productCode` (`productCode`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
