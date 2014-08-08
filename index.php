@@ -20,13 +20,13 @@ $util = new SbUtil();
 		<div class="span3">
 			<div class="well">
 
-				<div class="dropdown " id='cart'>
+				<div class="dropdown " id='cart' >
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#"> <i
 						class="icon-shopping-cart"></i> Your Cart <b class="caret"></b></a>
 
 					<div class="dropdown-menu well" role="menu"
 						aria-labelledby="dLabel">
-						<p>Cart is empty</p>
+							<p>Cart is empty</p>
 					</div>
 				</div>
 			</div>
@@ -105,22 +105,22 @@ $util = new SbUtil();
 					<div class="active item">
 						<img src="img/slider-1.jpg" width="1030px" height="300px">
 						<div class="carousel-caption">
-							<h4>DesignLoud, LLC</h4>
-							<p>This is a sample caption for our Twitter Bootstrap tutorial.</p>
+							<h4>Vintage Cars</h4>
+							<p>The most general sense, an old automobile, and in the narrower senses of car enthusiasts and collectors.</p>
 						</div>
 					</div>
 					<div class="item">
 						<img src="img/slider2.jpg" width="1030px" height="300px">
 						<div class="carousel-caption">
-							<h4>DesignLoud, LLC</h4>
-							<p>This is a sample caption for our Twitter Bootstrap tutorial.</p>
+							<h4>Luxary Cars</h4>
+							<p>Pleasant or desirable features beyond strict necessity — at increased expense.</p>
 						</div>
 					</div>
 					<div class="item">
 						<img src="img/slider-5.jpg" width="1030px" height="300px">
 						<div class="carousel-caption">
-							<h4>DesignLoud, LLC</h4>
-							<p>This is a sample caption for our Twitter Bootstrap tutorial.</p>
+							<h4>Small Cars</h4>
+							<p>A compact car, or small family car.</p>
 						</div>
 					</div>
 				</div>
@@ -134,7 +134,14 @@ $util = new SbUtil();
 			<ul class="thumbnails" style="width: 1100px">
 			<?php 
 			
-			$pr = "select * from `products` where deleted = 0";
+			$pr = "select * from `products` where deleted = 0 ";
+			if (isset($_GET['Cat'])) {
+				$pr .= "and productLine = '{$_GET['Cat']}' ";
+			}
+			
+			if (isset($_GET['brand'])) {
+				$pr .= "and productBrand = '{$_GET['brand']}'";
+			}
 			$prqry = mysql_query($pr);
 			
 			while ($prdata = mysql_fetch_assoc($prqry)){

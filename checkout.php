@@ -83,7 +83,7 @@ if (isset($_GET['confirm_order']) && $_GET['confirm_order'] == 'Confirm Order') 
 			unset($_SESSION['check_out_arr']);
 			
 			echo '<script>alert("Order Placed!");
-					window.location.href = "http://localhost/shopbuddy/";
+					window.location.href = "https://localhost/shopbuddy/";
 					</script>';
 		}
 	
@@ -113,7 +113,7 @@ if (isset($_GET['confirm_order']) && $_GET['confirm_order'] == 'Confirm Order') 
 							<div class="accordion-inner">
 								<div class="span4">
 										<div class="well">
-										    <button type="button" class="btn btn-large btn-block btn-primary" onclick="window.location = 'http://localhost/shopbuddy/new_user.php';">New to SB? Register Now!</button>
+										    <button type="button" class="btn btn-large btn-block btn-primary" onclick="window.location = 'https://localhost/shopbuddy/new_user.php';">New to SB? Register Now!</button>
 										    <form action="" method="post">
 										    <br>
 										    <input type="submit" name="submit" value="Continue as a Guest User" class="btn btn-large btn-block">
