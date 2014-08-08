@@ -6,7 +6,7 @@
 			<div class="span4">
 				<h4>Info</h4>
 				<ul class="nav nav-stacked">
-					<li><a href="#">Sell Conditions</a>
+					<li><a href="tnc.php">Sell Conditions</a>
 					
 					<li><a href="#">Shipping Costs</a>
 					
