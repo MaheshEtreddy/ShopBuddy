@@ -20,13 +20,13 @@ $util = new SbUtil();
 		<div class="span3">
 			<div class="well">
 
-				<div class="dropdown " id='cart'>
+				<div class="dropdown " id='cart' >
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#"> <i
 						class="icon-shopping-cart"></i> Your Cart <b class="caret"></b></a>
 
 					<div class="dropdown-menu well" role="menu"
 						aria-labelledby="dLabel">
-						<p>Cart is empty</p>
+							<p>Cart is empty</p>
 					</div>
 				</div>
 			</div>
@@ -134,7 +134,7 @@ $util = new SbUtil();
 			<ul class="thumbnails" style="width: 1100px">
 			<?php 
 			
-			$pr = "select * from `products` where deleted = 0";
+			$pr = "select * from `products` where deleted = 0 ";
 			$prqry = mysql_query($pr);
 			
 			while ($prdata = mysql_fetch_assoc($prqry)){
