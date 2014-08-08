@@ -579,8 +579,7 @@ a:hover,a:focus{
 
 .container{
 	margin-right:auto;
-	margin-left:360px;
-	*zoom:1
+	margin-left:auto;
 }
 
 .container:before,.container:after{
