@@ -15,6 +15,7 @@ if (isset($_SESSION['username'])) {
 }else {
 $n = 'in';
 }
+
 $udata = $util->userCheck($_SESSION["email"]);
 
 if (isset($_POST['submit']) && $_POST['submit'] == 'Continue as a Guest User') {
@@ -25,6 +26,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Continue as a Guest User') {
 
 if ( isset($_POST['submit']) && $_POST['submit'] == 'Login' ) {
 	$message = $util->loginAction($_POST['Username'], $_POST['Password'], $_GET['pcode']);
+	echo "<script>window.location.reload()</script>";
 	$n1 = 'in';
 }
 
@@ -83,7 +85,7 @@ if (isset($_GET['confirm_order']) && $_GET['confirm_order'] == 'Confirm Order') 
 			unset($_SESSION['check_out_arr']);
 			
 			echo '<script>alert("Order Placed!");
-					window.location.href = "https://localhost/shopbuddy/";
+					window.location.href = "http://localhost/shopbuddy/";
 					</script>';
 		}
 	

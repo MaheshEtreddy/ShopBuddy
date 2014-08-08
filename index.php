@@ -13,7 +13,6 @@ $util = new SbUtil();
 
 <!-- body included header in the top. -->
 
-
 <div class="container">
 	<div class="row" style="margin-top: 30px">
 
@@ -38,17 +37,25 @@ $util = new SbUtil();
 				if ($pqry != false) {
 					while ($pdata = mysql_fetch_array($pqry)){
 
-						if (isset($_GET['brand']) ) {
-							$checked = 'checked';
+						if (isset($_REQUEST['brand']) && in_array($pdata['productBrand'], $_REQUEST['brand']) ) {
+							$checked = "checked='checked'";
 						}else {
 							$checked = '';
 						}
-						echo "<label class='checkbox'> <input type='checkbox' value='{$pdata['productBrand']}' name='brand' id= 'brand' '{$checked}'> {$pdata['productBrand']}
+						echo "<label class='checkbox'> <input type='checkbox' value='{$pdata['productBrand']}' name='brand[]' id= 'brand' {$checked} > {$pdata['productBrand']}
 							</label>";
 					}
 				}
+				
+				if (isset($_SERVER['QUERY_STRING'])) {
+					parse_str($_SERVER['QUERY_STRING'], $query);
+						if (isset($query['Cat'])) {
+							echo "<input type='hidden' name='Cat' value='{$query['Cat']}'>";
+						}
+					
+				}
 				?>
-				<input type="submit" class="btn btn-info" value='submit'>
+				<input type="submit" class="btn btn-info" value='Apply'>
 				</form>
 			</div>
 
@@ -74,18 +81,35 @@ $util = new SbUtil();
 				</ul>
 			</div>
 
-			<div class="well">
+		 	<div class="well">
 				<h4>Sort</h4>
-				<form>
-					<label class="radio"> <input type="radio" name="optionsRadios"
-						id="optionsRadios1" value="option1" checked> Price low to high
-					</label> <label class="radio"> <input type="radio"
-						name="optionsRadios" id="optionsRadios2" value="option2"> Price
-						high to low
-					</label>
-					<button class="btn btn-primary pull-right" type="submit">Sort</button>
+				<form method="get" action="">
+					<label class="radio"> <input type="radio" name="sort" value="asc" checked> Price low to high</label> 
+					<label class="radio"> <input type="radio" name="sort" value="desc"> Price high to low</label>
+					<?php 
+					if (isset($_SERVER['REQUEST_URI'])) {
+						$cur_url = $_SERVER['REQUEST_URI'];
+						parse_str($_SERVER['QUERY_STRING'], $outputArray);
+						if (isset($outputArray['brand'])) {
+							$bd = $outputArray['brand'];
+						}
+						if (isset($outputArray['Cat'])) {
+							$ca =$outputArray['Cat'];
+						}
+						
+						if (isset($ca)) {
+							echo "<input type='hidden' name='Cat' value='{$ca}'>";
+						}
+						if (isset($bd)) {
+						foreach ($bd as $brand){
+							echo "<input type='hidden' name='brand[]' value='{$brand}'>";
+						}}
+						
+					}
+					?>
+					<input type="submit" class="btn btn-info" value='Sort'>
 				</form>
-			</div>
+			</div> 
 
 
 		</div>
@@ -94,14 +118,7 @@ $util = new SbUtil();
 			<div id="myCarousel" class="carousel slide" style="width: 1030px">
 				<!-- Carousel slides -->
 				<div class="carousel-inner">
-					<!-- <div class="active item">
-					<img src="img/1.jpg" width="916px" height="348px">
-					<div class="carousel-caption">
-						<h4>DesignLoud, LLC</h4>
-						<p>This is a sample caption for our Twitter Bootstrap tutorial.</p>
-					</div>
-				</div> -->
-
+					
 					<div class="active item">
 						<img src="img/slider-1.jpg" width="1030px" height="300px">
 						<div class="carousel-caption">
@@ -109,6 +126,7 @@ $util = new SbUtil();
 							<p>The most general sense, an old automobile, and in the narrower senses of car enthusiasts and collectors.</p>
 						</div>
 					</div>
+					
 					<div class="item">
 						<img src="img/slider2.jpg" width="1030px" height="300px">
 						<div class="carousel-caption">
@@ -116,6 +134,7 @@ $util = new SbUtil();
 							<p>Pleasant or desirable features beyond strict necessity — at increased expense.</p>
 						</div>
 					</div>
+					
 					<div class="item">
 						<img src="img/slider-5.jpg" width="1030px" height="300px">
 						<div class="carousel-caption">
@@ -139,12 +158,18 @@ $util = new SbUtil();
 				$pr .= "and productLine = '{$_GET['Cat']}' ";
 			}
 			
-			if (isset($_GET['brand'])) {
-				$pr .= "and productBrand = '{$_GET['brand']}'";
+			if (isset($_REQUEST['brand'])) {
+				$brands = "'" .implode("','", $_REQUEST['brand']). "'";
+				$pr .= "and productBrand in ({$brands}) ";
 			}
+			
+			if (isset($_GET['sort'])) {
+				$pr .= " order by `buyPrice` {$_GET['sort']} ";
+			}
+			
 			$prqry = mysql_query($pr);
 			
-			while ($prdata = mysql_fetch_assoc($prqry)){
+			while ($prdata = mysql_fetch_array($prqry)){
 				$url = 'view.php?';
 				$first = true;
 				foreach($prdata as $key => $value) {

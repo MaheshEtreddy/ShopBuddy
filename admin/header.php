@@ -55,7 +55,15 @@ tinymce.init({
 </script>
 
 <style type="text/css">
-
+.bga {
+    background: url(img/car_garage.jpg);
+    background-size: 100% 100%;
+    background-repeat: repeat-x;
+ 	opacity: 0.6; 
+    filter: alpha(opacity=50); 
+  
+    
+}
 textarea{
 width: 500px !important;
 }
@@ -63,7 +71,7 @@ width: 500px !important;
 </style>
 </head>
 <body>
-
+<div>
 <div class="navbar navbar-fixed-top">
     <div class="navbar">
         <div class="navbar-inner">
@@ -86,7 +94,7 @@ width: 500px !important;
                                 Users <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="user_list.php">Users List</a></li>
-                                <li><a href="create_user.php">Create User</a></li>
+                              
                                
                             </ul>
                         </li>
@@ -101,8 +109,7 @@ width: 500px !important;
                                
                             </ul>
                         </li>
-						<li><a href="scrolls.php"><i class="icon-tasks icon-black"></i>Scrollings</a></li>
-						<li><a href="iq.php"><i class="icon-file icon-black"></i>Interview Questions</a></li>
+					
                     </ul>
 
                     <!-- <ul class="nav pull-right settings">
@@ -125,8 +132,6 @@ width: 500px !important;
                         </ul>
                                </li>
                         <li class="divider-vertical"></li>
-                        <li><a href="http://localhost/shopbuddy/" class="tip icon logout" data-original-title="Switch to Site" data-placement="bottom"><i
-                           class="icon-large icon-off"></i></a></li>
                     </ul>
 
                     <ul class="nav pull-right settings">
@@ -148,4 +153,5 @@ width: 500px !important;
             </div>
         </div>
     </div>
+</div>
 </div>

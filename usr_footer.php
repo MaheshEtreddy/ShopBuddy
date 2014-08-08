@@ -7,22 +7,17 @@
 				<h4>Info</h4>
 				<ul class="nav nav-stacked">
 					<li><a href="#">Sell Conditions</a>
-					
 					<li><a href="#">Shipping Costs</a>
-					
 					<li><a href="#">Shipping Conditions</a>
-					
 					<li><a href="#">Returns</a>
-					
 					<li><a href="#">About Us</a>
-				
 				</ul>
 			</div>
 
 			<div class="span4">
 				<h4>Location and Contacts</h4>
 				<p>
-					<i class="icon-map-marker"></i>&nbsp;I do not Know Avenue, A City
+					<i class="icon-map-marker"></i>&nbsp;Park Avenue, Chicago City
 				</p>
 				<p>
 					<i class="icon-phone"></i>&nbsp;Phone: 234 739.126.72
@@ -30,12 +25,7 @@
 				<p>
 					<i class="icon-print"></i>&nbsp;Fax: 213 123.12.090
 				</p>
-				<p>
-					<i class="icon-envelope"></i>&nbsp;Email: info@code2fire.com
-				</p>
-				<p>
-					<i class="icon-globe"></i>&nbsp;Web: http://www.code2fire.com
-				</p>
+				
 			</div>
 
 			<div class="span4">
@@ -58,8 +48,8 @@
 				</p>
 			</div>
 			<div class="span6">
-				<a class="pull-right" href="http://www.code2fire.com"
-					target="_blank">credits by Code 2 Fire - (by) Mahesh & Vamsy</a>
+				<a class="pull-right" href="#"
+					target="_blank">Desgined by Bhargav Vinukonda</a>
 			</div>
 		</div>
 	</div>

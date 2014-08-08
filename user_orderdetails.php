@@ -6,15 +6,14 @@ include_once("header.php");
 if(isset($_POST['submit'])) {
 	$id_array = $_POST['data']; // return array
 	$id_count = count($_POST['data']); // count array
- 	print_r($_POST['data']);
- 	exit(0);
+ 
 	for($i=0; $i < $id_count; $i++) {
 		$id = $id_array[$i];
-		$query = mysql_query("UPDATE orders SET `status`= 'Order Cancelled By User' where `orderNumber` = '{$id}'");
+		$query = mysql_query("UPDATE orders SET `OrderStatus`= 'Order Cancelled By User' where `orderNumber` = '{$id}'");
 		if(!$query) { die(mysql_error()); }
 	}
-	// redirent after deleting
-	echo "<script>window.location = '/user_orderdetails.php?cancelled'</script>";
+	// REDIRECT
+	echo "<script>window.location = '?cancelled'</script>";
 }
 
 if (isset($_GET['cancelled'])) {
@@ -26,42 +25,7 @@ if (isset($_GET['cancelled'])) {
 }
 
 ?>
-<head>
-<script type="text/javascript">
-jQuery(function($) {
-	$("form input[id='check_all']").click(function() { // triggred check
-
-		var inputs = $("form input[type='checkbox']"); // get the checkbox
-
-		for(var i = 0; i < inputs.length; i++) { // count input tag in the form
-			var type = inputs[i].getAttribute("type"); //  get the type attribute
-				if(type == "checkbox") {
-					if(this.checked) {
-						inputs[i].checked = true; // checked
-					} else {
-						inputs[i].checked = false; // unchecked
-				 	 }
-				}
-		}
-	});
-
-	$("form input[id='submit']").click(function() {  // triggred submit
-
-		var count_checked = $("[name='data[]']:checked").length; // count the checked
-		if(count_checked == 0) {
-			alert("Please select a product(s) to delete.");
-			return false;
-		}
-		if(count_checked == 1) {
-			return confirm("Are you sure you want to delete these product?");
-		} else {
-			return confirm("Are you sure you want to delete these products?");
-		  }
-	});
-}); // jquery end
-
-</script>
-</head>
+<div class="container" style="margin-top: 35px">
 <h4>Order Details</h4>
 <form action="" method="post">
 	<table class="table well">
@@ -137,7 +101,8 @@ jQuery(function($) {
 		<input type="submit" name="submit" id="submit" value="Cancel">
 	</div>
 </form>
-<hr>
+</div>
+
 <?php 
 include_once ("usr_footer.php");
 ?>

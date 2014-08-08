@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+error_reporting(0);
 require_once 'SbUtil.php';
 
 SbUtil::dbConnect();
@@ -87,6 +89,36 @@ SbUtil::dbConnect();
 			});
 
 
+		$("form input[id='check_all']").click(function() { // triggred check
+
+			var inputs = $("form input[type='checkbox']"); // get the checkbox
+
+			for(var i = 0; i < inputs.length; i++) { // count input tag in the form
+				var type = inputs[i].getAttribute("type"); //  get the type attribute
+					if(type == "checkbox") {
+						if(this.checked) {
+							inputs[i].checked = true; // checked
+						} else {
+							inputs[i].checked = false; // unchecked
+					 	 }
+					}
+			}
+		});
+
+		$("form input[id='submit']").click(function() {  // triggred submit
+
+			var count_checked = $("[name='data[]']:checked").length; // count the checked
+			if(count_checked == 0) {
+				alert("Please select a product(s) to delete.");
+				return false;
+			}
+			if(count_checked == 1) {
+				return confirm("Are you sure you want to delete these product?");
+			} else {
+				return confirm("Are you sure you want to delete these products?");
+			  }
+		});
+		
 		});
 
 		function populateModal(data) {
@@ -106,6 +138,10 @@ SbUtil::dbConnect();
 			  xmlhttp.send();
 			} 
 
+		
+			
+		
+				
 </script>
 	
 </head>
@@ -145,7 +181,6 @@ ul li.cart_items {
 								<li><a href="account_settings.php"> Account Settings</a></li>
 								<li><a href="#l"> Profile</a></li>
 								<li><a href="user_orderdetails.php"> Your Orders</a></li>
-								<li><a href="#"> E-commerce Checkout</a></li>
 							</ul>
 						</li>
 						<li><a href="logout.php"><i class="icon-off icon-black"></i> Logout</a></li>

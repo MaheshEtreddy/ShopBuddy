@@ -36,7 +36,7 @@ if(count($_POST)>0) {
 if(isset($_SESSION["email"]) && strstr($_SESSION["email"], "@") == '@classicmodelcars.com') {
 	header("Location: admin/");
 }elseif (isset($_SESSION["email"]) && strstr($_SESSION["email"], "@") != '@classicmodelcars.com' ) {
-	header("Location:index.php");
+	echo "<script>window.location='index.php'</script>";
 }
 ?>
 
