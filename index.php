@@ -135,6 +135,13 @@ $util = new SbUtil();
 			<?php 
 			
 			$pr = "select * from `products` where deleted = 0 ";
+			if (isset($_GET['Cat'])) {
+				$pr .= "and productLine = '{$_GET['Cat']}' ";
+			}
+			
+			if (isset($_GET['brand'])) {
+				$pr .= "and productBrand = '{$_GET['brand']}'";
+			}
 			$prqry = mysql_query($pr);
 			
 			while ($prdata = mysql_fetch_assoc($prqry)){
