@@ -38,12 +38,12 @@ $util = new SbUtil();
 				if ($pqry != false) {
 					while ($pdata = mysql_fetch_array($pqry)){
 
-						if (isset($_GET['brand']) ) {
-							$checked = 'checked';
+						if (isset($_REQUEST['brand']) && in_array($pdata['productBrand'], $_REQUEST['brand']) ) {
+							$checked = "checked='checked'";
 						}else {
 							$checked = '';
 						}
-						echo "<label class='checkbox'> <input type='checkbox' value='{$pdata['productBrand']}' name='brand' id= 'brand' '{$checked}'> {$pdata['productBrand']}
+						echo "<label class='checkbox'> <input type='checkbox' value='{$pdata['productBrand']}' name='brand[]' id= 'brand' {$checked} > {$pdata['productBrand']}
 							</label>";
 					}
 				}
@@ -139,12 +139,13 @@ $util = new SbUtil();
 				$pr .= "and productLine = '{$_GET['Cat']}' ";
 			}
 			
-			if (isset($_GET['brand'])) {
-				$pr .= "and productBrand = '{$_GET['brand']}'";
+			if (isset($_REQUEST['brand'])) {
+				$brands = "'" .implode("','", $_REQUEST['brand']). "'";
+				$pr .= "and productBrand in ({$brands})";
 			}
 			$prqry = mysql_query($pr);
 			
-			while ($prdata = mysql_fetch_assoc($prqry)){
+			while ($prdata = mysql_fetch_array($prqry)){
 				$url = 'view.php?';
 				$first = true;
 				foreach($prdata as $key => $value) {
