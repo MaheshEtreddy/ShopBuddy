@@ -49,7 +49,7 @@
 			</div>
 			<div class="span6">
 				<a class="pull-right" href="#"
-					target="_blank">Desgined by Bhargav Vinukonda</a>
+					target="_blank">Desgined by Bhargav Arukonda</a>
 			</div>
 		</div>
 	</div>
