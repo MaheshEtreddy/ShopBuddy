@@ -5,11 +5,11 @@ require_once '../SbUtil.php';
 SbUtil::dbConnect();
 
 if(!isset($_SESSION["email"]) || strstr($_SESSION["email"], "@") != '@classicmodelcars.com'){
-	header("Location: https://localhost/shopbuddy/index.php");
+	header("Location: http://localhost/shopbuddy/index.php");
 }
 ?>
 <!DOCTYPE html>
-<html class="no-js">
+<html>
 <head>
     <meta charset="utf-8">
     <title>SuperAdmin</title>
@@ -62,7 +62,7 @@ width: 500px !important;
 
 </style>
 </head>
-<body onload="hide();">
+<body>
 
 <div class="navbar navbar-fixed-top">
     <div class="navbar">
@@ -125,7 +125,7 @@ width: 500px !important;
                         </ul>
                                </li>
                         <li class="divider-vertical"></li>
-                        <li><a href="https://localhost/shopbuddy/" class="tip icon logout" data-original-title="Switch to Site" data-placement="bottom"><i
+                        <li><a href="http://localhost/shopbuddy/" class="tip icon logout" data-original-title="Switch to Site" data-placement="bottom"><i
                            class="icon-large icon-off"></i></a></li>
                     </ul>
 

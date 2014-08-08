@@ -62,39 +62,38 @@ jQuery(function($) {
 
 </script>
 </head>
-  <h4>Order Details</h4>
-  <form action="" method="post">
-  <table class="table well">
-  
-    <thead>
-    <tr>
-    	<th><input type="checkbox" id="check_all" name="check_all"></th>
-<!--         <th>S.No</th> -->
-        <th>Order Number</th>
-        <th>Customer Name</th>
-        <th>Product Info</th>
-        <th>Payments</th>
-        <th>Payment Status</th>
-        <th>Quantity</th>
-        <th>Order Date</th>
-        <th>Order Status</th>
-        <th>Shipping Status</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-    
-    
-    
-    <?php 
+<h4>Order Details</h4>
+<form action="" method="post">
+	<table class="table well">
 
-    if (isset($_SESSION["user_id"])){
+		<thead>
+			<tr>
+				<th><input type="checkbox" id="check_all" name="check_all"></th>
+				<!--         <th>S.No</th> -->
+				<th>Order Number</th>
+				<th>Customer Name</th>
+				<th>Product Info</th>
+				<th>Payments</th>
+				<th>Payment Status</th>
+				<!--      <th>Quantity</th>-->
+				<th>Order Date</th>
+				<th>Order Status</th>
+				<th>Shipping Status</th>
+			</tr>
+		</thead>
+		<tbody>
+    
+    
+    
+    
+    <?php
+				if (isset ( $_SESSION["user_id"])){
     	$custID = $_SESSION["user_id"];
     		
     }else{
     	$custID = '15';
     }
-    $orderqry = mysql_query("select * from `orderdetails` where customerID={$custID} order by `orderNumber` DESC");
+    $orderqry = mysql_query("select * from `orders` where customerID={$custID} order by `orderNumber` DESC");
     $count = 1;
     if ($orderqry != false) {
     	while ($get_data = mysql_fetch_array($orderqry))
@@ -109,7 +108,7 @@ jQuery(function($) {
 			$paymntQry = mysql_query("select `amount`, `paymentStatus` from `payments` where `orderNumber` = '{$get_data['orderNumber']}'");
 			$paymntRes  = mysql_fetch_assoc($paymntQry);
 			 
-			$odrDateStatQry =  mysql_query("select `orderDate`, `shippingStatus`, `Ordercomments` from `orders` where `orderNumber` = '{$get_data['orderNumber']}'");
+			$odrDateStatQry =  mysql_query("select `orderDate`, `shippingStatus`, `OrderStatus` from `orders` where `orderNumber` = '{$get_data['orderNumber']}'");
 			$odrDateStatRes  = mysql_fetch_assoc($odrDateStatQry);
 			
 			echo "<tr class='success'>
@@ -119,7 +118,6 @@ jQuery(function($) {
 			<td>{$prodRes['productName']}</td>
 			<td>{$paymntRes['amount']}</td>
 			<td>{$paymntRes['paymentStatus']}</td>
-			<td>{$get_data['quantityOrdered']}</td>
 			<td>{$odrDateStatRes['orderDate']}</td>
 			<td>{$odrDateStatRes['OrderStatus']}</td>
 			<td>{$odrDateStatRes['shippingStatus']}</td>
@@ -134,8 +132,10 @@ jQuery(function($) {
 	?>
     
     </tbody>
-</table>
-<div align="center"><input type="submit" name="submit" id="submit" value="Cancel"></div>
+	</table>
+	<div align="center">
+		<input type="submit" name="submit" id="submit" value="Cancel">
+	</div>
 </form>
 <hr>
 <?php 
