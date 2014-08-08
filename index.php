@@ -105,22 +105,22 @@ $util = new SbUtil();
 					<div class="active item">
 						<img src="img/slider-1.jpg" width="1030px" height="300px">
 						<div class="carousel-caption">
-							<h4>DesignLoud, LLC</h4>
-							<p>This is a sample caption for our Twitter Bootstrap tutorial.</p>
+							<h4>Vintage Cars</h4>
+							<p>The most general sense, an old automobile, and in the narrower senses of car enthusiasts and collectors.</p>
 						</div>
 					</div>
 					<div class="item">
 						<img src="img/slider2.jpg" width="1030px" height="300px">
 						<div class="carousel-caption">
-							<h4>DesignLoud, LLC</h4>
-							<p>This is a sample caption for our Twitter Bootstrap tutorial.</p>
+							<h4>Luxary Cars</h4>
+							<p>Pleasant or desirable features beyond strict necessity — at increased expense.</p>
 						</div>
 					</div>
 					<div class="item">
 						<img src="img/slider-5.jpg" width="1030px" height="300px">
 						<div class="carousel-caption">
-							<h4>DesignLoud, LLC</h4>
-							<p>This is a sample caption for our Twitter Bootstrap tutorial.</p>
+							<h4>Small Cars</h4>
+							<p>A compact car, or small family car.</p>
 						</div>
 					</div>
 				</div>
